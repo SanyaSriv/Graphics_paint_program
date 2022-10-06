@@ -15,12 +15,28 @@ var FSHADER_SOURCE =
   '  gl_FragColor = u_FragColor;\n' +
   '}\n';
 
+// declaring the global variables
+var canvas;
+var gl;
+var g_points = [];  // The array for the position of a mouse press
+var g_colors = [];  // The array to store the color of a point
+
+// this function will be used for clearing the canvas
+function clearCanvas() {
+  // clearing the canvas with black colour
+  gl.clearColor(0.0, 0.0, 0.0, 1.0);
+  gl.clear(gl.COLOR_BUFFER_BIT);
+  // also will have to clear the buffers
+  g_points = []
+  g_colors = []
+}
+
 function main() {
   // Retrieve <canvas> element
-  var canvas = document.getElementById('webgl');
+  canvas = document.getElementById('webgl');
 
   // Get the rendering context for WebGL
-  var gl = getWebGLContext(canvas);
+  gl = getWebGLContext(canvas);
   if (!gl) {
     console.log('Failed to get the rendering context for WebGL');
     return;
@@ -56,8 +72,6 @@ function main() {
   gl.clear(gl.COLOR_BUFFER_BIT);
 }
 
-var g_points = [];  // The array for the position of a mouse press
-var g_colors = [];  // The array to store the color of a point
 function click(ev, gl, canvas, a_Position, u_FragColor) {
   var x = ev.clientX; // x coordinate of a mouse pointer
   var y = ev.clientY; // y coordinate of a mouse pointer
