@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Change a point color</title>
+  </head>
+
+  <body onload="main()">
+    <canvas id="webgl" width="400" height="400">
+    Please use a browser that supports "canvas"
+    </canvas>
+
+    <script src="lib/webgl-utils.js"></script>
+    <script src="lib/webgl-debug.js"></script>
+    <script src="lib/cuon-utils.js"></script>
+    <script src="asg1.js"></script>
+
+    <br><br>
+    <input type="button" value="Clear Canvas" onclick=""></input>
+    <br><br>
+    <label for="drawing_mode">Drawing Mode:</label>
+    <br> <br>
+    <input type="button" value="Square" onclick=""></input>
+    <input type="button" value="Triangle" onclick=""></input>
+    <input type="button" value="Circle" onclick=""></input>
+    <br> <br>
+    <label for="name">Shape Color:</label>
+    <br><br>
+    <label for="name">Red</label>
+    <input type="range" value="color_red" onclick=""></input>
+    <label for="name">Green</label>
+    <input type="range" value="color_green" onclick=""></input>
+    <label for="name">Blue</label>
+    <input type="range" value="color_blue" onclick=""></input>
+    <br><br>
+    <label for="name">Shape size:</label>
+    <input type="range" value="shape_size" onclick=""></input>
+    <label for="name">(Circles) Segment Count:</label>
+    <input type="range" value="segment_size" onclick=""></input>
+  </body>
+</html>
