@@ -2,6 +2,7 @@
 // Vertex shader program
 var VSHADER_SOURCE =
   `attribute vec4 a_Position;
+  attribute float a_PointSize;
   void main() {
     gl_Position = a_Position;
     gl_PointSize = 10.0;
@@ -90,6 +91,15 @@ function renderAllShapes() {
   }
 }
 
+// for selecting the right color and adding it to g_colors
+function selectColor() {
+  var red_color = document.getElementById("color_red").value;
+  var blue_color = document.getElementById("color_blue").value;
+  var green_color = document.getElementById("color_green").value;
+
+  console.log("printing out the values here: ", red_color, blue_color, green_color);
+}
+
 function main() {
 
   setupWebGL();
@@ -115,6 +125,7 @@ function click(ev) {
 
   // Store the coordinates to g_points array
   g_points.push([x, y]);
+  selectColor();
   // Store the coordinates to g_points array
   if (x >= 0.0 && y >= 0.0) {      // First quadrant
     g_colors.push([1.0, 0.0, 0.0, 1.0]);  // Red
