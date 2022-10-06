@@ -16,10 +16,12 @@ var FSHADER_SOURCE =
   '}\n';
 
 // declaring the global variables
-var canvas;
-var gl;
+let canvas;
+let gl;
 var g_points = [];  // The array for the position of a mouse press
 var g_colors = [];  // The array to store the color of a point
+let a_position;
+let u_FragColor;
 
 // this function will be used for clearing the canvas
 function clearCanvas() {
@@ -27,11 +29,12 @@ function clearCanvas() {
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
   gl.clear(gl.COLOR_BUFFER_BIT);
   // also will have to clear the buffers
-  g_points = []
-  g_colors = []
+  g_points = [] // resetting the co-ordinates buffer to empty array
+  g_colors = [] // resetting the colours buffer to empty array
 }
 
-function main() {
+// extract the canvas and initialize WebGL
+function setupWebGL() {
   // Retrieve <canvas> element
   canvas = document.getElementById('webgl');
 
@@ -41,29 +44,59 @@ function main() {
     console.log('Failed to get the rendering context for WebGL');
     return;
   }
+}
 
-  // Initialize shaders
+// compile the shader programs, attach the javascript variables to the GLSL variables
+function connectVariablesToGLSL() {
   if (!initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE)) {
     console.log('Failed to intialize shaders.');
     return;
   }
 
   // // Get the storage location of a_Position
-  var a_Position = gl.getAttribLocation(gl.program, 'a_Position');
+  a_Position = gl.getAttribLocation(gl.program, 'a_Position');
   if (a_Position < 0) {
     console.log('Failed to get the storage location of a_Position');
     return;
   }
 
   // Get the storage location of u_FragColor
-  var u_FragColor = gl.getUniformLocation(gl.program, 'u_FragColor');
+  u_FragColor = gl.getUniformLocation(gl.program, 'u_FragColor');
   if (!u_FragColor) {
     console.log('Failed to get the storage location of u_FragColor');
     return;
   }
+}
+
+// based on some data structure that is holding all the information
+// about what to draw, actually draw all the shapes
+function renderAllShapes() {
+  // Clear <canvas>
+  gl.clear(gl.COLOR_BUFFER_BIT);
+
+  var len = g_points.length;
+  for(var i = 0; i < len; i++) {
+    var xy = g_points[i];
+    var rgba = g_colors[i];
+
+    // Pass the position of a point to a_Position variable
+    gl.vertexAttrib3f(a_Position, xy[0], xy[1], 0.0);
+    // Pass the color of a point to u_FragColor variable
+    gl.uniform4f(u_FragColor, rgba[0], rgba[1], rgba[2], rgba[3]);
+    // Draw
+    gl.drawArrays(gl.POINTS, 0, 1);
+  }
+}
+
+function main() {
+
+  setupWebGL();
+
+  // Initialize shaders
+  connectVariablesToGLSL();
 
   // Register function (event handler) to be called on a mouse press
-  canvas.onmousedown = function(ev){ click(ev, gl, canvas, a_Position, u_FragColor) };
+  canvas.onmousedown = function(ev){ click(ev) };
 
   // Specify the color for clearing <canvas>
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -72,7 +105,7 @@ function main() {
   gl.clear(gl.COLOR_BUFFER_BIT);
 }
 
-function click(ev, gl, canvas, a_Position, u_FragColor) {
+function click(ev) {
   var x = ev.clientX; // x coordinate of a mouse pointer
   var y = ev.clientY; // y coordinate of a mouse pointer
   var rect = ev.target.getBoundingClientRect();
@@ -91,19 +124,6 @@ function click(ev, gl, canvas, a_Position, u_FragColor) {
     g_colors.push([1.0, 1.0, 1.0, 1.0]);  // White
   }
 
-  // Clear <canvas>
-  gl.clear(gl.COLOR_BUFFER_BIT);
+  renderAllShapes();
 
-  var len = g_points.length;
-  for(var i = 0; i < len; i++) {
-    var xy = g_points[i];
-    var rgba = g_colors[i];
-
-    // Pass the position of a point to a_Position variable
-    gl.vertexAttrib3f(a_Position, xy[0], xy[1], 0.0);
-    // Pass the color of a point to u_FragColor variable
-    gl.uniform4f(u_FragColor, rgba[0], rgba[1], rgba[2], rgba[3]);
-    // Draw
-    gl.drawArrays(gl.POINTS, 0, 1);
-  }
 }
