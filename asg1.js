@@ -1,19 +1,19 @@
 // ColoredPoint.js (c) 2012 matsuda
 // Vertex shader program
 var VSHADER_SOURCE =
-  'attribute vec4 a_Position;\n' +
-  'void main() {\n' +
-  '  gl_Position = a_Position;\n' +
-  '  gl_PointSize = 10.0;\n' +
-  '}\n';
+  `attribute vec4 a_Position;
+  void main() {
+    gl_Position = a_Position;
+    gl_PointSize = 10.0;
+  }`;
 
 // Fragment shader program
 var FSHADER_SOURCE =
-  'precision mediump float;\n' +
-  'uniform vec4 u_FragColor;\n' +  // uniform変数
-  'void main() {\n' +
-  '  gl_FragColor = u_FragColor;\n' +
-  '}\n';
+  `precision mediump float;
+  uniform vec4 u_FragColor;
+  void main() {
+    gl_FragColor = u_FragColor;
+  }`;
 
 // declaring the global variables
 let canvas;
@@ -25,12 +25,14 @@ let u_FragColor;
 
 // this function will be used for clearing the canvas
 function clearCanvas() {
-  // clearing the canvas with black colour
-  gl.clearColor(0.0, 0.0, 0.0, 1.0);
-  gl.clear(gl.COLOR_BUFFER_BIT);
+  // // clearing the canvas with black colour
+  // gl.clearColor(0.0, 0.0, 0.0, 1.0);
+  // gl.clear(gl.COLOR_BUFFER_BIT);
   // also will have to clear the buffers
   g_points = [] // resetting the co-ordinates buffer to empty array
   g_colors = [] // resetting the colours buffer to empty array
+  // calling this function too
+  renderAllShapes();
 }
 
 // extract the canvas and initialize WebGL
@@ -91,7 +93,6 @@ function renderAllShapes() {
 function main() {
 
   setupWebGL();
-
   // Initialize shaders
   connectVariablesToGLSL();
 
@@ -100,7 +101,6 @@ function main() {
 
   // Specify the color for clearing <canvas>
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
-
   // Clear <canvas>
   gl.clear(gl.COLOR_BUFFER_BIT);
 }
