@@ -5,7 +5,7 @@ var VSHADER_SOURCE =
   attribute float a_PointSize;
   void main() {
     gl_Position = a_Position;
-    gl_PointSize = 10.0;
+    gl_PointSize = a_PointSize;
   }`;
 
 // Fragment shader program
@@ -21,8 +21,11 @@ let canvas;
 let gl;
 var g_points = [];  // The array for the position of a mouse press
 var g_colors = [];  // The array to store the color of a point
-let a_position;
+let g_shapeSize = [];
+let a_Position;
+let a_PointSize;
 let u_FragColor;
+let size_of_shape;
 let red_color, blue_color, green_color;
 // this function will be used for clearing the canvas
 function clearCanvas() {
@@ -63,6 +66,13 @@ function connectVariablesToGLSL() {
     return;
   }
 
+  // get the storage location of size
+  a_PointSize = gl.getAttribLocation(gl.program, 'a_PointSize');
+  if (a_PointSize < 0) {
+    console.log('Failed to get the storage location of a_PointSize');
+    return;
+  }
+
   // Get the storage location of u_FragColor
   u_FragColor = gl.getUniformLocation(gl.program, 'u_FragColor');
   if (!u_FragColor) {
@@ -81,11 +91,13 @@ function renderAllShapes() {
   for(var i = 0; i < len; i++) {
     var xy = g_points[i];
     var rgba = g_colors[i];
-
+    var size = g_shapeSize[i];
     // Pass the position of a point to a_Position variable
     gl.vertexAttrib3f(a_Position, xy[0], xy[1], 0.0);
     // Pass the color of a point to u_FragColor variable
     gl.uniform4f(u_FragColor, rgba[0], rgba[1], rgba[2], rgba[3]);
+    // passing the size too now
+    gl.vertexAttrib1f(a_PointSize, size);
     // Draw
     gl.drawArrays(gl.POINTS, 0, 1);
   }
@@ -105,6 +117,9 @@ function selectColor() {
   console.log("printing out the values here: ", red_color, blue_color, green_color);
 }
 
+function selectSize() {
+  size_of_shape = document.getElementById("shape_size").value;
+}
 function main() {
 
   setupWebGL();
@@ -134,6 +149,12 @@ function click(ev) {
   selectColor();
   // Store the coordinates to g_points array
   g_colors.push([red_color, green_color, blue_color, 1.0])
+  // now implementing the shape size
+  selectSize();
+  g_shapeSize.push(size_of_shape);
+  console.log("shape size is: ", size_of_shape)
+
+
   // if (x >= 0.0 && y >= 0.0) {      // First quadrant
   //   g_colors.push([1.0, 0.0, 0.0, 1.0]);  // Red
   // } else if (x < 0.0 && y < 0.0) { // Third quadrant
