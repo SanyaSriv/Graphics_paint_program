@@ -35,6 +35,7 @@ function clearCanvas() {
   // also will have to clear the buffers
   g_points = [] // resetting the co-ordinates buffer to empty array
   g_colors = [] // resetting the colours buffer to empty array
+  g_shapeSize = []
   // calling this function too
   renderAllShapes();
 }
@@ -128,7 +129,8 @@ function main() {
 
   // Register function (event handler) to be called on a mouse press
   canvas.onmousedown = function(ev){ click(ev) };
-
+  // to add drag functionality: (ev.buttons == 1): if the mouse is down
+  canvas.onmousemove = function(ev){if (ev.buttons == 1) click(ev)};
   // Specify the color for clearing <canvas>
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
   // Clear <canvas>
