@@ -23,7 +23,7 @@ var g_points = [];  // The array for the position of a mouse press
 var g_colors = [];  // The array to store the color of a point
 let a_position;
 let u_FragColor;
-
+let red_color, blue_color, green_color;
 // this function will be used for clearing the canvas
 function clearCanvas() {
   // // clearing the canvas with black colour
@@ -93,9 +93,14 @@ function renderAllShapes() {
 
 // for selecting the right color and adding it to g_colors
 function selectColor() {
-  var red_color = document.getElementById("color_red").value;
-  var blue_color = document.getElementById("color_blue").value;
-  var green_color = document.getElementById("color_green").value;
+  red_color = document.getElementById("color_red").value;
+  blue_color = document.getElementById("color_blue").value;
+  green_color = document.getElementById("color_green").value;
+  // The numbers are in 100 so we might have to scale them to 1
+  // scaling the things
+  red_color = red_color / 100; // if it is 100 -> it will convert to 1
+  blue_color = blue_color / 100;
+  green_color = green_color / 100;
 
   console.log("printing out the values here: ", red_color, blue_color, green_color);
 }
@@ -125,15 +130,17 @@ function click(ev) {
 
   // Store the coordinates to g_points array
   g_points.push([x, y]);
+  // extract the colours
   selectColor();
   // Store the coordinates to g_points array
-  if (x >= 0.0 && y >= 0.0) {      // First quadrant
-    g_colors.push([1.0, 0.0, 0.0, 1.0]);  // Red
-  } else if (x < 0.0 && y < 0.0) { // Third quadrant
-    g_colors.push([0.0, 1.0, 0.0, 1.0]);  // Green
-  } else {                         // Others
-    g_colors.push([1.0, 1.0, 1.0, 1.0]);  // White
-  }
+  g_colors.push([red_color, green_color, blue_color, 1.0])
+  // if (x >= 0.0 && y >= 0.0) {      // First quadrant
+  //   g_colors.push([1.0, 0.0, 0.0, 1.0]);  // Red
+  // } else if (x < 0.0 && y < 0.0) { // Third quadrant
+  //   g_colors.push([0.0, 1.0, 0.0, 1.0]);  // Green
+  // } else {                         // Others
+  //   g_colors.push([1.0, 1.0, 1.0, 1.0]);  // White
+  // }
 
   renderAllShapes();
 
