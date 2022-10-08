@@ -29,7 +29,11 @@ let red_color, blue_color, green_color;
 let g_points_array = []
 
 // for knowing which shape to draw
-let G_SHAPE_TYPE = "Point" // we will be starting with point (square shape)
+const POINT = 0;
+const TRIANGLE = 1;
+const CIRCLE = 2;
+
+let G_SHAPE_TYPE = POINT // we will be starting with point (square shape)
 
 // this function will be used for clearing the canvas
 function clearCanvas() {
@@ -119,16 +123,16 @@ function selectSize() {
 // TODO: chnage this thing to the AddActionsToHtmlUI function
 function ChangeShapeToTriangle() {
   console.log("Changing this thing to triangle");
-  G_SHAPE_TYPE = "Triangle";
+  G_SHAPE_TYPE = TRIANGLE;
 }
 
 function ChangeShapeToSquare() {
   // square in our case is represented by a point;
-  G_SHAPE_TYPE = "Point";
+  G_SHAPE_TYPE = POINT;
 }
 
 function ChangeShapeToCircle() {
-  G_SHAPE_TYPE = "Circle";
+  G_SHAPE_TYPE = CIRCLE;
 }
 
 // TODO: Add the fps count: optional
@@ -166,14 +170,15 @@ function click(ev) {
 
   // make a new point or tiangle
   let new_point;
-  if (G_SHAPE_TYPE == "Point") {
+  console.log(G_SHAPE_TYPE);
+  if (G_SHAPE_TYPE == POINT) {
     new_point = new Point();
     new_point.type = "point";
     console.log("It is in here");
-  } else if (G_SHAPE_TYPE == "Triangle") {
+  } else if (G_SHAPE_TYPE == TRIANGLE) {
     new_point = new Triangle();
     new_point.type = "Triangle";
-  } else if (G_SHAPE_TYPE == "Circle") {
+  } else if (G_SHAPE_TYPE == CIRCLE) {
     console.log("Comes in here");
     new_point = new Circle();
     new_point.type = "Circle";
