@@ -19,7 +19,7 @@ class Circle {
     let center_y = xy[1];
     let vertices = []
     let step = 30; // TOOD: Change this for now
-    let scaling_factor = this.size / 200;
+    let scaling_factor = this.size / 300;
     // i is the angle in this loop
     for (var i = 0; i < 360; i += step) {
 

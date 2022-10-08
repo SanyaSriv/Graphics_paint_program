@@ -13,8 +13,8 @@ class Triangle {
     // Pass the color of a point to u_FragColor variable
     gl.uniform4f(u_FragColor, rgba[0], rgba[1], rgba[2], rgba[3]);
     // Draw
-    var delta = this.size / 200;
-    drawTriangles([xy[0], xy[1], xy[0]+.1, xy[1], xy[0], xy[1]+.1]);
+    var scaling_factor = this.size / 200;
+    drawTriangles([xy[0], xy[1], xy[0] + scaling_factor, xy[1], xy[0], xy[1] + scaling_factor]);
   }
 }
 
@@ -43,7 +43,6 @@ function drawTriangles(vertices) {
 
   // Enable the assignment to a_Position variable
   gl.enableVertexAttribArray(a_Position);
-  console.log("Going to call draw arrays");
   gl.drawArrays(gl.TRIANGLES, 0, n);
   return n;
 }

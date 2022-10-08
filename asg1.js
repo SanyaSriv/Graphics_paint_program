@@ -192,7 +192,6 @@ function click(ev) {
   new_point.size = size_of_shape;
 
   g_points_array.push(new_point);
-  console.log(g_points_array);
   renderAllShapes();
 
 }
