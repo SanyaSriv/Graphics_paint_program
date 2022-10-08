@@ -2,7 +2,7 @@ class Circle {
   constructor() {
     this.color = [0.0, 0.0, 0.0, 1.0];
     this.position = [0.0, 0.0, 0.0];
-    this.type = "point";
+    this.type = "circle";
     this.size = 5.0;
   }
   // TODO: Change this to Circle functionality
@@ -10,16 +10,40 @@ class Circle {
     var xy = this.position;
     var rgba = this.color;
     var size = this.size;
-    // Pass the position of a point to a_Position variable
 
-    gl.disableVertexAttribArray(a_Position);
-
-    gl.vertexAttrib3f(a_Position, xy[0], xy[1], 0.0);
-    // Pass the color of a point to u_FragColor variable
     gl.uniform4f(u_FragColor, rgba[0], rgba[1], rgba[2], rgba[3]);
-    // passing the size too now
-    gl.uniform1f(u_PointSize, size);
+
     // Draw
-    gl.drawArrays(gl.POINTS, 0, 1);
+
+    let center_x = xy[0];
+    let center_y = xy[1];
+    let vertices = []
+    let step = 30; // TOOD: Change this for now
+    // i is the angle in this loop
+    for (var i = 0; i < 360; i += step) {
+
+      // getting the angle
+      let angle1 = i * (Math.PI / 180);
+      let angle2 = (i + step) * (Math.PI / 180);
+      // point 1
+      var point0_x = center_x;
+      var point0_y = center_y;
+
+      // point2
+      var point1_x = center_x + Math.cos(angle1);
+      var point1_y = center_y + Math.sin(angle1);
+
+      // point3
+      var point2_x = center_x + Math.cos(angle2);
+      var point2_y = center_y + Math.sin(angle2);
+
+      // we alsp need to scale the points
+      // point1_x = point1_x / 50;
+      // point1_y = point1_y / 50;
+      // point2_x = point2_x / 50;
+      // point2_y = point2_y / 50;
+      drawTriangles([point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]);
+    }
+
   }
 }

@@ -47,7 +47,7 @@ function drawTriangles(vertices) {
 
   // Enable the assignment to a_Position variable
   gl.enableVertexAttribArray(a_Position);
-
+  console.log("Going to call draw arrays");
   gl.drawArrays(gl.TRIANGLES, 0, n);
   return n;
 }
