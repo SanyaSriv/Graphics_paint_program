@@ -45,7 +45,9 @@ function setupWebGL() {
   canvas = document.getElementById('webgl');
 
   // Get the rendering context for WebGL
-  gl = getWebGLContext(canvas);
+  // gl = getWebGLContext(canvas);
+  // replaving the above line with this to improve performance
+  gl = canvas.getContext("webgl", {preserveDrawingBuffer : true});
   if (!gl) {
     console.log('Failed to get the rendering context for WebGL');
     return;
@@ -111,6 +113,7 @@ function selectSize() {
   size_of_shape = document.getElementById("shape_size").value;
 }
 
+// TODO: Add the fps count: optional
 function main() {
 
   setupWebGL();
