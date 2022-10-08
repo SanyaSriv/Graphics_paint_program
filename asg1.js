@@ -2,10 +2,10 @@
 // Vertex shader program
 var VSHADER_SOURCE =
   `attribute vec4 a_Position;
-  attribute float a_PointSize;
+  uniform float u_PointSize;
   void main() {
     gl_Position = a_Position;
-    gl_PointSize = a_PointSize;
+    gl_PointSize = u_PointSize;
   }`;
 
 // Fragment shader program
@@ -23,7 +23,7 @@ var g_points = [];  // The array for the position of a mouse press
 var g_colors = [];  // The array to store the color of a point
 let g_shapeSize = [];
 let a_Position;
-let a_PointSize;
+let u_PointSize;
 let u_FragColor;
 let size_of_shape;
 let red_color, blue_color, green_color;
@@ -68,9 +68,9 @@ function connectVariablesToGLSL() {
   }
 
   // get the storage location of size
-  a_PointSize = gl.getAttribLocation(gl.program, 'a_PointSize');
-  if (a_PointSize < 0) {
-    console.log('Failed to get the storage location of a_PointSize');
+  u_PointSize = gl.getUniformLocation(gl.program, 'u_PointSize');
+  if (u_PointSize < 0) {
+    console.log('Failed to get the storage location of u_PointSize');
     return;
   }
 
@@ -98,7 +98,7 @@ function renderAllShapes() {
     // Pass the color of a point to u_FragColor variable
     gl.uniform4f(u_FragColor, rgba[0], rgba[1], rgba[2], rgba[3]);
     // passing the size too now
-    gl.vertexAttrib1f(a_PointSize, size);
+    gl.uniform1f(u_PointSize, size);
     // Draw
     gl.drawArrays(gl.POINTS, 0, 1);
   }
@@ -155,15 +155,6 @@ function click(ev) {
   selectSize();
   g_shapeSize.push(size_of_shape);
   console.log("shape size is: ", size_of_shape)
-
-
-  // if (x >= 0.0 && y >= 0.0) {      // First quadrant
-  //   g_colors.push([1.0, 0.0, 0.0, 1.0]);  // Red
-  // } else if (x < 0.0 && y < 0.0) { // Third quadrant
-  //   g_colors.push([0.0, 1.0, 0.0, 1.0]);  // Green
-  // } else {                         // Others
-  //   g_colors.push([1.0, 1.0, 1.0, 1.0]);  // White
-  // }
 
   renderAllShapes();
 
