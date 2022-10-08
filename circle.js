@@ -4,6 +4,7 @@ class Circle {
     this.position = [0.0, 0.0, 0.0];
     this.type = "circle";
     this.size = 5.0;
+    this.segments = 0;
   }
   // TODO: Change this to Circle functionality
   render() {
@@ -18,7 +19,7 @@ class Circle {
     let center_x = xy[0];
     let center_y = xy[1];
     let vertices = []
-    let step = 30; // TOOD: Change this for now
+    let step = 360 / this.segments; // TOOD: Change this for now
     let scaling_factor = this.size / 300;
     // i is the angle in this loop
     for (var i = 0; i < 360; i += step) {

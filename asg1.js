@@ -24,7 +24,7 @@ let u_PointSize;
 let u_FragColor;
 let size_of_shape;
 let red_color, blue_color, green_color;
-
+let number_of_segments;
 // we will be replacing all the arrays with one singular array
 let g_points_array = []
 
@@ -120,6 +120,9 @@ function selectSize() {
   size_of_shape = document.getElementById("shape_size").value;
 }
 
+function selectSegment() {
+  number_of_segments = document.getElementById("segment_size").value;
+}
 // TODO: chnage this thing to the AddActionsToHtmlUI function
 function ChangeShapeToTriangle() {
   console.log("Changing this thing to triangle");
@@ -167,7 +170,9 @@ function click(ev) {
   selectColor();
   // get the size
   selectSize();
-
+  // get the segments
+  selectSegment();
+  
   // make a new point or tiangle
   let new_point;
   console.log(G_SHAPE_TYPE);
@@ -182,6 +187,7 @@ function click(ev) {
     console.log("Comes in here");
     new_point = new Circle();
     new_point.type = "Circle";
+    new_point.segments = number_of_segments;
   }
 
   new_point.position[0] = x;
