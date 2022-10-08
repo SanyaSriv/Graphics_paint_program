@@ -38,11 +38,6 @@ class Circle {
       var point2_x = center_x + (Math.cos(angle2) * scaling_factor);
       var point2_y = center_y + (Math.sin(angle2) * scaling_factor);
 
-      // we alsp need to scale the points
-      // point1_x = point1_x / 50;
-      // point1_y = point1_y / 50;
-      // point2_x = point2_x / 50;
-      // point2_y = point2_y / 50;
       drawTriangles([point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]);
     }
 
