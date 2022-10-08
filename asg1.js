@@ -28,30 +28,6 @@ let red_color, blue_color, green_color;
 // we will be replacing all the arrays with one singular array
 let g_points_array = []
 
-class Point {
-  constructor() {
-    this.color = [0.0, 0.0, 0.0, 1.0];
-    this.position = [0.0, 0.0, 0.0];
-    this.type = "point";
-    this.size = 5.0;
-  }
-
-  render() {
-    var xy = this.position;
-    var rgba = this.color;
-    var size = this.size;
-    // Pass the position of a point to a_Position variable
-    gl.vertexAttrib3f(a_Position, xy[0], xy[1], 0.0);
-    // Pass the color of a point to u_FragColor variable
-    gl.uniform4f(u_FragColor, rgba[0], rgba[1], rgba[2], rgba[3]);
-    // passing the size too now
-    gl.uniform1f(u_PointSize, size);
-    // Draw
-    gl.drawArrays(gl.POINTS, 0, 1);
-  }
-}
-
-
 // this function will be used for clearing the canvas
 function clearCanvas() {
   // // clearing the canvas with black colour
@@ -144,7 +120,7 @@ function main() {
   // Register function (event handler) to be called on a mouse press
   canvas.onmousedown = function(ev){ click(ev) };
   // to add drag functionality: (ev.buttons == 1): if the mouse is down
-  canvas.onmousemove = function(ev){if (ev.buttons == 1) click(ev)};
+  canvas.onmousemove = function(ev){if (ev.buttons == 1) {click(ev)}};
   // Specify the color for clearing <canvas>
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
   // Clear <canvas>
