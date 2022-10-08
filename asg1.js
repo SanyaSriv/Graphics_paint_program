@@ -29,7 +29,7 @@ let red_color, blue_color, green_color;
 let g_points_array = []
 
 // for knowing which shape to draw
-let G_SHAPE_TYPE = "Point"
+let G_SHAPE_TYPE = "Point" // we will be starting with point (square shape)
 
 // this function will be used for clearing the canvas
 function clearCanvas() {
@@ -173,6 +173,10 @@ function click(ev) {
   } else if (G_SHAPE_TYPE == "Triangle") {
     new_point = new Triangle();
     new_point.type = "Triangle";
+  } else if (G_SHAPE_TYPE == "Circle") {
+    console.log("Comes in here");
+    new_point = new Circle();
+    new_point.type = "Circle";
   }
 
   new_point.position[0] = x;
