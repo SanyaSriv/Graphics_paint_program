@@ -19,6 +19,7 @@ class Circle {
     let center_y = xy[1];
     let vertices = []
     let step = 30; // TOOD: Change this for now
+    let scaling_factor = this.size / 200;
     // i is the angle in this loop
     for (var i = 0; i < 360; i += step) {
 
@@ -30,12 +31,12 @@ class Circle {
       var point0_y = center_y;
 
       // point2
-      var point1_x = center_x + Math.cos(angle1);
-      var point1_y = center_y + Math.sin(angle1);
+      var point1_x = center_x + (Math.cos(angle1) * scaling_factor);
+      var point1_y = center_y + (Math.sin(angle1) * scaling_factor);
 
       // point3
-      var point2_x = center_x + Math.cos(angle2);
-      var point2_y = center_y + Math.sin(angle2);
+      var point2_x = center_x + (Math.cos(angle2) * scaling_factor);
+      var point2_y = center_y + (Math.sin(angle2) * scaling_factor);
 
       // we alsp need to scale the points
       // point1_x = point1_x / 50;
