@@ -28,6 +28,9 @@ let red_color, blue_color, green_color;
 // we will be replacing all the arrays with one singular array
 let g_points_array = []
 
+// for knowing which shape to draw
+let G_SHAPE_TYPE = "Point"
+
 // this function will be used for clearing the canvas
 function clearCanvas() {
   // // clearing the canvas with black colour
@@ -113,6 +116,21 @@ function selectSize() {
   size_of_shape = document.getElementById("shape_size").value;
 }
 
+// TODO: chnage this thing to the AddActionsToHtmlUI function
+function ChangeShapeToTriangle() {
+  console.log("Changing this thing to triangle");
+  G_SHAPE_TYPE = "Triangle";
+}
+
+function ChangeShapeToSquare() {
+  // square in our case is represented by a point;
+  G_SHAPE_TYPE = "Point";
+}
+
+function ChangeShapeToCircle() {
+  G_SHAPE_TYPE = "Circle";
+}
+
 // TODO: Add the fps count: optional
 function main() {
 
@@ -125,9 +143,12 @@ function main() {
   // to add drag functionality: (ev.buttons == 1): if the mouse is down
   canvas.onmousemove = function(ev){if (ev.buttons == 1) {click(ev)}};
   // Specify the color for clearing <canvas>
+
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
   // Clear <canvas>
   gl.clear(gl.COLOR_BUFFER_BIT);
+
+
 }
 
 function click(ev) {
@@ -143,8 +164,17 @@ function click(ev) {
   // get the size
   selectSize();
 
-  // make a new point
-  let new_point = new Point();
+  // make a new point or tiangle
+  let new_point;
+  if (G_SHAPE_TYPE == "Point") {
+    new_point = new Point();
+    new_point.type = "point";
+    console.log("It is in here");
+  } else if (G_SHAPE_TYPE == "Triangle") {
+    new_point = new Triangle();
+    new_point.type = "Triangle";
+  }
+
   new_point.position[0] = x;
   new_point.position[1] = y;
   new_point.color[0] = red_color;
@@ -153,7 +183,7 @@ function click(ev) {
   new_point.size = size_of_shape;
 
   g_points_array.push(new_point);
-
+  console.log(g_points_array);
   renderAllShapes();
 
 }
