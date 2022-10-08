@@ -19,23 +19,32 @@ var FSHADER_SOURCE =
 // declaring the global variables
 let canvas;
 let gl;
-var g_points = [];  // The array for the position of a mouse press
-var g_colors = [];  // The array to store the color of a point
-let g_shapeSize = [];
 let a_Position;
 let u_PointSize;
 let u_FragColor;
 let size_of_shape;
 let red_color, blue_color, green_color;
+
+// we will be replacing all the arrays with one singular array
+let g_points_array = []
+
+class Point {
+  constructor() {
+    this.color = [0.0, 0.0, 0.0, 1.0];
+    this.position = [0.0, 0.0, 0.0];
+    this.type = "point";
+    this.size = 5.0;
+  }
+}
+
+
 // this function will be used for clearing the canvas
 function clearCanvas() {
   // // clearing the canvas with black colour
   // gl.clearColor(0.0, 0.0, 0.0, 1.0);
   // gl.clear(gl.COLOR_BUFFER_BIT);
   // also will have to clear the buffers
-  g_points = [] // resetting the co-ordinates buffer to empty array
-  g_colors = [] // resetting the colours buffer to empty array
-  g_shapeSize = []
+  g_points_array = []
   // calling this function too
   renderAllShapes();
 }
@@ -88,11 +97,11 @@ function renderAllShapes() {
   // Clear <canvas>
   gl.clear(gl.COLOR_BUFFER_BIT);
 
-  var len = g_points.length;
+  var len = g_points_array.length;
   for(var i = 0; i < len; i++) {
-    var xy = g_points[i];
-    var rgba = g_colors[i];
-    var size = g_shapeSize[i];
+    var xy = g_points_array[i].position;
+    var rgba = g_points_array[i].color;
+    var size = g_points_array[i].size;
     // Pass the position of a point to a_Position variable
     gl.vertexAttrib3f(a_Position, xy[0], xy[1], 0.0);
     // Pass the color of a point to u_FragColor variable
@@ -105,6 +114,7 @@ function renderAllShapes() {
 }
 
 // for selecting the right color and adding it to g_colors
+// TODO: Change this approach
 function selectColor() {
   red_color = document.getElementById("color_red").value;
   blue_color = document.getElementById("color_blue").value;
@@ -115,12 +125,12 @@ function selectColor() {
   blue_color = blue_color / 100;
   green_color = green_color / 100;
 
-  console.log("printing out the values here: ", red_color, blue_color, green_color);
 }
 
 function selectSize() {
   size_of_shape = document.getElementById("shape_size").value;
 }
+
 function main() {
 
   setupWebGL();
@@ -145,16 +155,21 @@ function click(ev) {
   x = ((x - rect.left) - canvas.width/2)/(canvas.width/2);
   y = (canvas.height/2 - (y - rect.top))/(canvas.height/2);
 
-  // Store the coordinates to g_points array
-  g_points.push([x, y]);
   // extract the colours
   selectColor();
-  // Store the coordinates to g_points array
-  g_colors.push([red_color, green_color, blue_color, 1.0])
-  // now implementing the shape size
+  // get the size
   selectSize();
-  g_shapeSize.push(size_of_shape);
-  console.log("shape size is: ", size_of_shape)
+
+  // make a new point
+  let new_point = new Point();
+  new_point.position[0] = x;
+  new_point.position[1] = y;
+  new_point.color[0] = red_color;
+  new_point.color[1] = green_color;
+  new_point.color[2] = blue_color;
+  new_point.size = size_of_shape;
+
+  g_points_array.push(new_point);
 
   renderAllShapes();
 
