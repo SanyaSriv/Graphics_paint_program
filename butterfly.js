@@ -8,12 +8,12 @@ function butterfly() {
   var blue6 = [75/255, 164/255, 196/255, 1.0];
   var blue5 = [108/255, 208/255, 230/255, 1.0];
   var blue4 = [101/255, 203/255, 235/255, 1.0];
-  var blue3;
+  var blue3 = [69/255, 166/255, 219/255, 1.0];
   var blue2;
   var blue1;
   // making the butterfly body
   // triangle 30
-  gl.uniform4f(u_FragColor, 13/255, 91/255, 147/255, 1.0);
+  gl.uniform4f(u_FragColor, blue9[0], blue9[1], blue9[2], blue9[3]);
   drawTriangles([0.0, -0.14, 0.0, 0.14, 0.10, 0.0])
 
   // triangle 31

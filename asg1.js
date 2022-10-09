@@ -145,8 +145,6 @@ function click(ev) {
 
   x = ((x - rect.left) - canvas.width/2)/(canvas.width/2);
   y = (canvas.height/2 - (y - rect.top))/(canvas.height/2);
-
-  console.log("x and y are: ", x, y);
   // extract the colours
   selectColor();
   // get the size
@@ -156,16 +154,13 @@ function click(ev) {
 
   // make a new point or tiangle
   let new_point;
-  console.log(G_SHAPE_TYPE);
   if (G_SHAPE_TYPE == POINT) {
     new_point = new Point();
     new_point.type = "point";
-    console.log("It is in here");
   } else if (G_SHAPE_TYPE == TRIANGLE) {
     new_point = new Triangle();
     new_point.type = "Triangle";
   } else if (G_SHAPE_TYPE == CIRCLE) {
-    console.log("Comes in here");
     new_point = new Circle();
     new_point.type = "Circle";
     new_point.segments = number_of_segments;
