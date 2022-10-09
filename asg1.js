@@ -81,13 +81,16 @@ function connectVariablesToGLSL() {
     console.log('Failed to get the storage location of u_FragColor');
     return;
   }
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+  // glEnable(GL_BLEND);
+  // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 // Function to render all shapes stored in g_points_array
 function renderAllShapes() {
   // Clear <canvas>
   gl.clear(gl.COLOR_BUFFER_BIT);
-
   var len = g_points_array.length;
   for(var i = 0; i < len; i++) {
     g_points_array[i].render();
@@ -156,7 +159,8 @@ function click(ev) {
   selectSize();
   // get the segments
   selectSegment();
-
+  // getting transparency
+  selectTransparency();
   // make a new point or tiangle
   let new_point;
   if (G_SHAPE_TYPE == POINT) {
@@ -176,7 +180,7 @@ function click(ev) {
   new_point.color[0] = red_color;
   new_point.color[1] = green_color;
   new_point.color[2] = blue_color;
-  new_point.color[3] = 0.2;
+  new_point.color[3] = 1 - (transparency / 100);
   new_point.size = size_of_shape;
 
   g_points_array.push(new_point);
