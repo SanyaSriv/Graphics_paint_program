@@ -12,8 +12,9 @@ class Triangle {
     var size = this.size;
     // Pass the color of a point to u_FragColor variable
     gl.uniform4f(u_FragColor, rgba[0], rgba[1], rgba[2], rgba[3]);
-    // Draw
+    // Deciding the scaling factor
     var scaling_factor = this.size / 200;
+    // Drawing the traingle finally
     drawTriangles([xy[0], xy[1], xy[0] + scaling_factor, xy[1], xy[0], xy[1] + scaling_factor]);
   }
 }

@@ -6,27 +6,25 @@ class Circle {
     this.size = 5.0;
     this.segments = 0;
   }
-  // TODO: Change this to Circle functionality
   render() {
     var xy = this.position;
     var rgba = this.color;
     var size = this.size;
-
+      // Pass the color of a point to u_FragColor variable
     gl.uniform4f(u_FragColor, rgba[0], rgba[1], rgba[2], rgba[3]);
 
     // Draw
     let center_x = xy[0];
     let center_y = xy[1];
-    console.log("center is: ", center_x, center_y);
-    let vertices = []
-    let step = 360 / this.segments; // TOOD: Change this for now
+    let step = 360 / this.segments;
     let scaling_factor = this.size / 300;
+
     // i is the angle in this loop
     for (var i = 0; i < 360; i += step) {
-
-      // getting the angle
+      // getting the angles
       let angle1 = i * (Math.PI / 180);
       let angle2 = (i + step) * (Math.PI / 180);
+
       // point 1
       var point0_x = center_x;
       var point0_y = center_y;

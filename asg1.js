@@ -1,4 +1,3 @@
-// ColoredPoint.js (c) 2012 matsuda
 // Vertex shader program
 var VSHADER_SOURCE =
   `attribute vec4 a_Position;
@@ -26,6 +25,7 @@ let size_of_shape;
 let red_color, blue_color, green_color;
 let number_of_segments;
 let transparency;
+
 // we will be replacing all the arrays with one singular array
 let g_points_array = []
 
@@ -34,12 +34,12 @@ const POINT = 0;
 const TRIANGLE = 1;
 const CIRCLE = 2;
 
-let G_SHAPE_TYPE = POINT // we will be starting with point (square shape)
+// we will be starting with default: point (square shape)
+let G_SHAPE_TYPE = POINT
 
 // this function will be used for clearing the canvas
 function clearCanvas() {
   g_points_array = []
-  // calling this function too
   renderAllShapes();
 }
 
@@ -47,10 +47,6 @@ function clearCanvas() {
 function setupWebGL() {
   // Retrieve <canvas> element
   canvas = document.getElementById('webgl');
-
-  // Get the rendering context for WebGL
-  // gl = getWebGLContext(canvas);
-  // replaving the above line with this to improve performance
   gl = canvas.getContext("webgl", {preserveDrawingBuffer : true});
   if (!gl) {
     console.log('Failed to get the rendering context for WebGL');
@@ -72,7 +68,7 @@ function connectVariablesToGLSL() {
     return;
   }
 
-  // get the storage location of size
+  // get the storage location of u_PointSize
   u_PointSize = gl.getUniformLocation(gl.program, 'u_PointSize');
   if (u_PointSize < 0) {
     console.log('Failed to get the storage location of u_PointSize');
@@ -87,8 +83,7 @@ function connectVariablesToGLSL() {
   }
 }
 
-// based on some data structure that is holding all the information
-// about what to draw, actually draw all the shapes
+// Function to render all shapes stored in g_points_array
 function renderAllShapes() {
   // Clear <canvas>
   gl.clear(gl.COLOR_BUFFER_BIT);
@@ -106,38 +101,48 @@ function selectColor() {
   blue_color = document.getElementById("color_blue").value;
   green_color = document.getElementById("color_green").value;
 
-  red_color = red_color / 100; // if it is 100 -> it will convert to 1
+  red_color = red_color / 100;
   blue_color = blue_color / 100;
   green_color = green_color / 100;
 
 }
 
+// For getting the transparency level selected by the user
 function selectTransparency() {
   transparency = document.getElementById("Transparency").value;
 }
+
+// for selecting the size selected by the user
 function selectSize() {
   size_of_shape = document.getElementById("shape_size").value;
 }
 
+// for selecting the number of segments in case of circles
 function selectSegment() {
   number_of_segments = document.getElementById("segment_size").value;
 }
 
+
 // TODO: chnage this thing to the AddActionsToHtmlUI function
+// Chnage the current shape type to triangle
 function ChangeShapeToTriangle() {
   console.log("Changing this thing to triangle");
   G_SHAPE_TYPE = TRIANGLE;
 }
 
+// change the current shape to square
 function ChangeShapeToSquare() {
   // square in our case is represented by a point;
   G_SHAPE_TYPE = POINT;
 }
 
+// Change the current shape to circle
 function ChangeShapeToCircle() {
   G_SHAPE_TYPE = CIRCLE;
 }
 
+
+// this function does everything when something is clicked
 function click(ev) {
   var x = ev.clientX; // x coordinate of a mouse pointer
   var y = ev.clientY; // y coordinate of a mouse pointer
@@ -171,6 +176,7 @@ function click(ev) {
   new_point.color[0] = red_color;
   new_point.color[1] = green_color;
   new_point.color[2] = blue_color;
+  new_point.color[3] = 0.2;
   new_point.size = size_of_shape;
 
   g_points_array.push(new_point);
