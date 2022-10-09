@@ -83,8 +83,6 @@ function connectVariablesToGLSL() {
   }
   gl.enable(gl.BLEND);
   gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-  // glEnable(GL_BLEND);
-  // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 // Function to render all shapes stored in g_points_array
