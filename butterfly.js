@@ -1,4 +1,16 @@
 function butterfly() {
+
+  // defining some color arrays here that will be used later on
+  // higher number = darker shade
+  var blue9 = [11/255, 63/255, 121/255, 1.0];
+  var blue8 = [42/255, 111/255, 161/255, 1.0];
+  var blue7 = [51/255, 139/255, 171/255, 1.0];
+  var blue6 = [75/255, 164/255, 196/255, 1.0];
+  var blue5 = [108/255, 208/255, 230/255, 1.0];
+  var blue4 = [101/255, 203/255, 235/255, 1.0];
+  var blue3;
+  var blue2;
+  var blue1;
   // making the butterfly body
   // triangle 30
   gl.uniform4f(u_FragColor, 13/255, 91/255, 147/255, 1.0);
@@ -148,44 +160,45 @@ function butterfly() {
   drawTriangles([-0.30, -0.30, -0.52, -0.06, -0.43, -0.37]);
 
   // going to draw the butterfly antenna - right side
+  // The shade of the dots should get lighter as they get smaller
   var antenna1 = new Circle();
   antenna1.position = [0.035, 0.155, 0.0];
-  antenna1.color = [11/255, 63/255, 121/255, 1.0]
+  antenna1.color = blue9;
   antenna1.size = 10.0;
   antenna1.segments = 5;
   antenna1.render();
 
   var antenna2 = new Circle();
   antenna2.position = [0.08, 0.235, 0.0];
-  antenna2.color = [11/255, 63/255, 121/255, 1.0];
+  antenna2.color = blue8;
   antenna2.size = 8.0;
   antenna2.segments = 5;
   antenna2.render();
 
   var antenna3 = new Circle();
   antenna3.position = [0.125, 0.285, 0.0];
-  antenna3.color = [11/255, 63/255, 121/255, 1.0];
+  antenna3.color = blue7;
   antenna3.size = 7.0;
   antenna3.segments = 5;
   antenna3.render();
 
   var antenna4 = new Circle();
   antenna4.position = [0.175, 0.33, 0.0];
-  antenna4.color = [11/255, 63/255, 121/255, 1.0];
+  antenna4.color = blue6;
   antenna4.size = 5.0;
   antenna4.segments = 5;
   antenna4.render();
 
   var antenna5 = new Circle();
   antenna5.position = [0.24, 0.365, 0.0];
-  antenna5.color = [11/255, 63/255, 121/255, 1.0];
+  antenna5.color = blue5;
   antenna5.size = 4.0;
   antenna5.segments = 5;
   antenna5.render();
 
   var antenna6 = new Circle();
   antenna6.position = [0.27, 0.31, 0.0];
-  antenna6.color = [11/255, 63/255, 121/255, 1.0];
+  antenna6.color = blue4;
   antenna6.size = 3.0;
   antenna6.segments = 5;
   antenna6.render();
@@ -194,42 +207,42 @@ function butterfly() {
 
   var antenna7 = new Circle();
   antenna7.position = [-0.035, 0.155, 0.0];
-  antenna7.color = [11/255, 63/255, 121/255, 1.0]
+  antenna7.color = blue9;
   antenna7.size = 10.0;
   antenna7.segments = 5;
   antenna7.render();
 
   var antenna8 = new Circle();
   antenna8.position = [-0.08, 0.235, 0.0];
-  antenna8.color = [11/255, 63/255, 121/255, 1.0];
+  antenna8.color = blue8;
   antenna8.size = 8.0;
   antenna8.segments = 5;
   antenna8.render();
 
   var antenna9 = new Circle();
   antenna9.position = [-0.125, 0.285, 0.0];
-  antenna9.color = [11/255, 63/255, 121/255, 1.0];
+  antenna9.color = blue7;
   antenna9.size = 7.0;
   antenna9.segments = 5;
   antenna9.render();
 
   var antenna10 = new Circle();
   antenna10.position = [-0.175, 0.33, 0.0];
-  antenna10.color = [11/255, 63/255, 121/255, 1.0];
+  antenna10.color = blue6;
   antenna10.size = 5.0;
   antenna10.segments = 5;
   antenna10.render();
 
   var antenna11 = new Circle();
   antenna11.position = [-0.24, 0.365, 0.0];
-  antenna11.color = [11/255, 63/255, 121/255, 1.0];
+  antenna11.color = blue5;
   antenna11.size = 4.0;
   antenna11.segments = 5;
   antenna11.render();
 
   var antenna12 = new Circle();
   antenna12.position = [-0.27, 0.31, 0.0];
-  antenna12.color = [11/255, 63/255, 121/255, 1.0];
+  antenna12.color = blue4;
   antenna12.size = 3.0;
   antenna12.segments = 5;
   antenna12.render();
