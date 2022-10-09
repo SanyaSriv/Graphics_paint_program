@@ -47,12 +47,6 @@ function butterfly() {
   gl.uniform4f(u_FragColor, 41/255, 149/255, 211/255, 1.0);
   drawTriangles([tri2_pt2[0], tri2_pt2[1], tri2_pt3[0], tri2_pt3[1], tri3_pt3[0], tri3_pt3[1]])
 
-  // // traingle 4
-  // drawTriangles([0.1, 0.005, 0.24, 0.007, 0.15, -0.27])
-  //
-  // // traingle 5
-  // drawTriangles([0.1, 0.005, 0.24, 0.007, 0.15, -0.27])
-  //
   // triangle 12
   gl.uniform4f(u_FragColor, 95/255, 230/255, 241/255, 1.0);
   drawTriangles([0.47, 0.375, 0.565, 0.325, 0.24, 0.007])
@@ -65,8 +59,28 @@ function butterfly() {
   gl.uniform4f(u_FragColor, 194/255, 230/255, 242/255, 1.0);
   drawTriangles([0.565, 0.325, 0.63, 0.61, 0.92, 0.78])
 
-  // // traingle 9
-  // gl.uniform4f(u_FragColor, 194/255, 230/255, 242/255, 1.0);
-  // drawTriangles([0.565, 0.325, 0.63, 0.61, 0.92, 0.78])
+  // traingle 9
+  gl.uniform4f(u_FragColor, 19/255, 107/255, 141/255, 1.0);
+  drawTriangles([0.565, 0.325, 0.92, 0.78, 0.75, 0.30])
+
+  // triangle 8
+  gl.uniform4f(u_FragColor, 99/255, 187/255, 233/255, 1.0);
+  drawTriangles([0.565, 0.325, 0.75, 0.30, 0.52, -0.06])
+
+  // triangle 8
+  gl.uniform4f(u_FragColor, 99/255, 187/255, 233/255, 1.0);
+  drawTriangles([0.565, 0.325, 0.75, 0.30, 0.52, -0.06])
+
+  // triangle 7
+  gl.uniform4f(u_FragColor, 21/255, 77/255, 136/255, 1.0);
+  drawTriangles([0.565, 0.325, 0.52, -0.06, 0.24, 0.007]);
+
+  // triangle 5
+  gl.uniform4f(u_FragColor, 95/255, 230/255, 241/255, 1.0);
+  drawTriangles([0.52, -0.06, 0.24, 0.007, 0.30, -0.30]);
+
+  // triangle 4
+  gl.uniform4f(u_FragColor, 21/255, 77/255, 136/255, 1.0);
+  drawTriangles([0.30, -0.30, 0.52, -0.06, 0.43, -0.37]);
 
 }
