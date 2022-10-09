@@ -25,6 +25,7 @@ let u_FragColor;
 let size_of_shape;
 let red_color, blue_color, green_color;
 let number_of_segments;
+let transparency;
 // we will be replacing all the arrays with one singular array
 let g_points_array = []
 
@@ -37,10 +38,6 @@ let G_SHAPE_TYPE = POINT // we will be starting with point (square shape)
 
 // this function will be used for clearing the canvas
 function clearCanvas() {
-  // // clearing the canvas with black colour
-  // gl.clearColor(0.0, 0.0, 0.0, 1.0);
-  // gl.clear(gl.COLOR_BUFFER_BIT);
-  // also will have to clear the buffers
   g_points_array = []
   // calling this function too
   renderAllShapes();
@@ -108,14 +105,16 @@ function selectColor() {
   red_color = document.getElementById("color_red").value;
   blue_color = document.getElementById("color_blue").value;
   green_color = document.getElementById("color_green").value;
-  // The numbers are in 100 so we might have to scale them to 1
-  // scaling the things
+
   red_color = red_color / 100; // if it is 100 -> it will convert to 1
   blue_color = blue_color / 100;
   green_color = green_color / 100;
 
 }
 
+function selectTransparency() {
+  transparency = document.getElementById("Transparency").value;
+}
 function selectSize() {
   size_of_shape = document.getElementById("shape_size").value;
 }
@@ -123,6 +122,7 @@ function selectSize() {
 function selectSegment() {
   number_of_segments = document.getElementById("segment_size").value;
 }
+
 // TODO: chnage this thing to the AddActionsToHtmlUI function
 function ChangeShapeToTriangle() {
   console.log("Changing this thing to triangle");
@@ -138,26 +138,6 @@ function ChangeShapeToCircle() {
   G_SHAPE_TYPE = CIRCLE;
 }
 
-// TODO: Add the fps count: optional
-function main() {
-
-  setupWebGL();
-  // Initialize shaders
-  connectVariablesToGLSL();
-
-  // Register function (event handler) to be called on a mouse press
-  canvas.onmousedown = function(ev){ click(ev) };
-  // to add drag functionality: (ev.buttons == 1): if the mouse is down
-  canvas.onmousemove = function(ev){if (ev.buttons == 1) {click(ev)}};
-  // Specify the color for clearing <canvas>
-
-  gl.clearColor(0.0, 0.0, 0.0, 1.0);
-  // Clear <canvas>
-  gl.clear(gl.COLOR_BUFFER_BIT);
-
-
-}
-
 function click(ev) {
   var x = ev.clientX; // x coordinate of a mouse pointer
   var y = ev.clientY; // y coordinate of a mouse pointer
@@ -166,13 +146,16 @@ function click(ev) {
   x = ((x - rect.left) - canvas.width/2)/(canvas.width/2);
   y = (canvas.height/2 - (y - rect.top))/(canvas.height/2);
 
+  console.log("x and y are: ", x, y);
   // extract the colours
   selectColor();
   // get the size
   selectSize();
   // get the segments
   selectSegment();
-  
+  // get the transparency
+  selectTransparency();
+
   // make a new point or tiangle
   let new_point;
   console.log(G_SHAPE_TYPE);
@@ -195,9 +178,30 @@ function click(ev) {
   new_point.color[0] = red_color;
   new_point.color[1] = green_color;
   new_point.color[2] = blue_color;
+  new_point.color[3] = 0.5;
   new_point.size = size_of_shape;
 
   g_points_array.push(new_point);
   renderAllShapes();
+
+}
+
+// TODO: Add the fps count: optional
+function main() {
+
+  setupWebGL();
+  // Initialize shaders
+  connectVariablesToGLSL();
+
+  // Register function (event handler) to be called on a mouse press
+  canvas.onmousedown = function(ev){ click(ev) };
+  // to add drag functionality: (ev.buttons == 1): if the mouse is down
+  canvas.onmousemove = function(ev){if (ev.buttons == 1) {click(ev)}};
+  // Specify the color for clearing <canvas>
+
+  gl.clearColor(0.0, 0.0, 0.0, 1.0);
+  // Clear <canvas>
+  gl.clear(gl.COLOR_BUFFER_BIT);
+
 
 }

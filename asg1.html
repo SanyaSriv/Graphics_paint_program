@@ -17,7 +17,7 @@
     <script src="point.js"></script>
     <script src="triangle.js"></script>
     <script src="circle.js"></script>
-
+    <script src="butterfly.js"></script>
     <br><br>
     <input type="button" value="Clear Canvas" onclick="clearCanvas()"></input>
     <br><br>
@@ -26,6 +26,7 @@
     <input type="button" id="Square" value="Square" onclick="ChangeShapeToSquare()"></input>
     <input type="button" id="Triangle" value="Triangle" onclick="ChangeShapeToTriangle()"></input>
     <input type="button" id="Circle" value="Circle" onclick="ChangeShapeToCircle()"></input>
+    <input type="button" id="Butterfly" value="Draw a Butterfly" onclick="butterfly()"></input>
     <br> <br>
     <label for="name">Shape Color:</label>
     <br><br>
@@ -35,6 +36,8 @@
     <input type="range" id="color_green" min=0 max=100></input>
     <label for="name">Blue</label>
     <input type="range" id="color_blue" min=0 max=100></input>
+    <label for="name">Transparency</label>
+    <input type="range" id="Transparency" min=0 max=100></input>
     <br><br>
     <label for="name">Shape size:</label>
     <input type="range" id="shape_size"></input>
