@@ -83,4 +83,23 @@ function butterfly() {
   gl.uniform4f(u_FragColor, 21/255, 77/255, 136/255, 1.0);
   drawTriangles([0.30, -0.30, 0.52, -0.06, 0.43, -0.37]);
 
+
+  // going to draw the left wing
+
+  // triangle 16
+  gl.uniform4f(u_FragColor, 52/255, 155/255, 198/255, 1.0);
+  drawTriangles([-0.1, 0.005, -0.24, 0.007, -0.47, 0.375])
+
+  // triangle 15
+  gl.uniform4f(u_FragColor, 19/255, 115/255, 148/255, 1.0);
+  drawTriangles([-0.1, 0.005, -0.24, 0.007, -0.15, -0.27])
+
+  // triangle 17
+  gl.uniform4f(u_FragColor, 100/255, 167/255, 191/255, 1.0);
+  drawTriangles([-0.24, 0.007, -0.15, -0.27, -0.30, -0.30])
+
+  // triangle 18
+  gl.uniform4f(u_FragColor, 178/255, 222/255, 239/255, 1.0);
+  drawTriangles([-0.30, -0.30, -0.15, -0.27, -0.20, -0.48])
+
 }
