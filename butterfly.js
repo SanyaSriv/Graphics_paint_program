@@ -96,10 +96,55 @@ function butterfly() {
 
   // triangle 17
   gl.uniform4f(u_FragColor, 100/255, 167/255, 191/255, 1.0);
-  drawTriangles([-0.24, 0.007, -0.15, -0.27, -0.30, -0.30])
+  drawTriangles([-0.24, 0.007, -0.15, -0.27, -0.30, -0.30]);
 
   // triangle 18
   gl.uniform4f(u_FragColor, 178/255, 222/255, 239/255, 1.0);
-  drawTriangles([-0.30, -0.30, -0.15, -0.27, -0.20, -0.48])
+  drawTriangles([-0.30, -0.30, -0.15, -0.27, -0.20, -0.48]);
+
+  // triangle 19
+  gl.uniform4f(u_FragColor, 108/255, 190/255, 236/255, 1.0);
+  drawTriangles([-0.30, -0.30, -0.20, -0.48, -0.33, -0.48])
+
+  var tri2_pt1 = [-0.20, -0.48];
+  var tri2_pt2 = [-0.33, -0.48];
+  var tri2_pt3 = [-0.30, -0.30];
+
+  // traingle 20
+  var tri3_pt3 = [-0.43, -0.37]
+  gl.uniform4f(u_FragColor, 41/255, 149/255, 211/255, 1.0);
+  drawTriangles([tri2_pt2[0], tri2_pt2[1], tri2_pt3[0], tri2_pt3[1], tri3_pt3[0], tri3_pt3[1]])
+
+  // triangle 25
+  gl.uniform4f(u_FragColor, 95/255, 230/255, 241/255, 1.0);
+  drawTriangles([-0.47, 0.375, -0.565, 0.325, -0.24, 0.007])
+
+  // triangle 26
+  gl.uniform4f(u_FragColor, 25/255,90/255, 138/255, 1.0);
+  drawTriangles([-0.47, 0.375, -0.565, 0.325, -0.63, 0.61])
+
+  // traingle 17
+  gl.uniform4f(u_FragColor, 194/255, 230/255, 242/255, 1.0);
+  drawTriangles([-0.565, 0.325, -0.63, 0.61, -0.92, 0.78])
+
+  // traingle 28
+  gl.uniform4f(u_FragColor, 19/255, 107/255, 141/255, 1.0);
+  drawTriangles([-0.565, 0.325, -0.92, 0.78, -0.75, 0.30])
+
+  // triangle 29
+  gl.uniform4f(u_FragColor, 99/255, 187/255, 233/255, 1.0);
+  drawTriangles([-0.565, 0.325, -0.75, 0.30, -0.52, -0.06])
+
+  // triangle 24
+  gl.uniform4f(u_FragColor, 21/255, 77/255, 136/255, 1.0);
+  drawTriangles([-0.565, 0.325, -0.52, -0.06, -0.24, 0.007]);
+
+  // triangle 23
+  gl.uniform4f(u_FragColor, 95/255, 230/255, 241/255, 1.0);
+  drawTriangles([-0.52, -0.06, -0.24, 0.007, -0.30, -0.30]);
+
+  // triangle 21
+  gl.uniform4f(u_FragColor, 21/255, 77/255, 136/255, 1.0);
+  drawTriangles([-0.30, -0.30, -0.52, -0.06, -0.43, -0.37]);
 
 }
