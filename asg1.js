@@ -153,8 +153,6 @@ function click(ev) {
   selectSize();
   // get the segments
   selectSegment();
-  // get the transparency
-  selectTransparency();
 
   // make a new point or tiangle
   let new_point;
@@ -178,7 +176,6 @@ function click(ev) {
   new_point.color[0] = red_color;
   new_point.color[1] = green_color;
   new_point.color[2] = blue_color;
-  new_point.color[3] = 0.5;
   new_point.size = size_of_shape;
 
   g_points_array.push(new_point);

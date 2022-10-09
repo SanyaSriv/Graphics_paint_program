@@ -147,4 +147,53 @@ function butterfly() {
   gl.uniform4f(u_FragColor, 21/255, 77/255, 136/255, 1.0);
   drawTriangles([-0.30, -0.30, -0.52, -0.06, -0.43, -0.37]);
 
+  // going to draw the butterfly antenna - right side
+  var antenna1 = new Circle();
+  antenna1.position = [0.035, 0.155, 0.0];
+  antenna1.color = [11/255, 63/255, 121/255, 1.0]
+  antenna1.size = 10.0;
+  antenna1.segments = 5;
+  antenna1.render();
+
+  var antenna2 = new Circle();
+  antenna2.position = [0.08, 0.235, 0.0];
+  antenna2.color = [11/255, 63/255, 121/255, 1.0];
+  antenna2.size = 8.0;
+  antenna2.segments = 5;
+  antenna2.render();
+
+  var antenna3 = new Circle();
+  antenna3.position = [0.125, 0.285, 0.0];
+  antenna3.color = [11/255, 63/255, 121/255, 1.0];
+  antenna3.size = 7.0;
+  antenna3.segments = 5;
+  antenna3.render();
+
+  var antenna4 = new Circle();
+  antenna4.position = [0.175, 0.33, 0.0];
+  antenna4.color = [11/255, 63/255, 121/255, 1.0];
+  antenna4.size = 5.0;
+  antenna4.segments = 5;
+  antenna4.render();
+
+  var antenna5 = new Circle();
+  antenna4.position = [0.24, 0.365, 0.0];
+  antenna4.color = [11/255, 63/255, 121/255, 1.0];
+  antenna4.size = 4.0;
+  antenna4.segments = 5;
+  antenna4.render();
+
+  var antenna6 = new Circle();
+  antenna4.position = [0.27, 0.31, 0.0];
+  antenna4.color = [11/255, 63/255, 121/255, 1.0];
+  antenna4.size = 3.0;
+  antenna4.segments = 5;
+  antenna4.render();
+
+  var antenna7 = new Circle();
+  antenna4.position = [-0.035, 0.135, 0.0];
+  antenna4.color = [11/255, 63/255, 121/255, 1.0];
+  antenna4.size = 2.0;
+  antenna4.segments = 5;
+  antenna4.render();
 }

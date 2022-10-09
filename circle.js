@@ -15,9 +15,9 @@ class Circle {
     gl.uniform4f(u_FragColor, rgba[0], rgba[1], rgba[2], rgba[3]);
 
     // Draw
-
     let center_x = xy[0];
     let center_y = xy[1];
+    console.log("center is: ", center_x, center_y);
     let vertices = []
     let step = 360 / this.segments; // TOOD: Change this for now
     let scaling_factor = this.size / 300;
