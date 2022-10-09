@@ -177,23 +177,61 @@ function butterfly() {
   antenna4.render();
 
   var antenna5 = new Circle();
-  antenna4.position = [0.24, 0.365, 0.0];
-  antenna4.color = [11/255, 63/255, 121/255, 1.0];
-  antenna4.size = 4.0;
-  antenna4.segments = 5;
-  antenna4.render();
+  antenna5.position = [0.24, 0.365, 0.0];
+  antenna5.color = [11/255, 63/255, 121/255, 1.0];
+  antenna5.size = 4.0;
+  antenna5.segments = 5;
+  antenna5.render();
 
   var antenna6 = new Circle();
-  antenna4.position = [0.27, 0.31, 0.0];
-  antenna4.color = [11/255, 63/255, 121/255, 1.0];
-  antenna4.size = 3.0;
-  antenna4.segments = 5;
-  antenna4.render();
+  antenna6.position = [0.27, 0.31, 0.0];
+  antenna6.color = [11/255, 63/255, 121/255, 1.0];
+  antenna6.size = 3.0;
+  antenna6.segments = 5;
+  antenna6.render();
+
+  // now going to add the left antenna
 
   var antenna7 = new Circle();
-  antenna4.position = [-0.035, 0.135, 0.0];
-  antenna4.color = [11/255, 63/255, 121/255, 1.0];
-  antenna4.size = 2.0;
-  antenna4.segments = 5;
-  antenna4.render();
+  antenna7.position = [-0.035, 0.155, 0.0];
+  antenna7.color = [11/255, 63/255, 121/255, 1.0]
+  antenna7.size = 10.0;
+  antenna7.segments = 5;
+  antenna7.render();
+
+  var antenna8 = new Circle();
+  antenna8.position = [-0.08, 0.235, 0.0];
+  antenna8.color = [11/255, 63/255, 121/255, 1.0];
+  antenna8.size = 8.0;
+  antenna8.segments = 5;
+  antenna8.render();
+
+  var antenna9 = new Circle();
+  antenna9.position = [-0.125, 0.285, 0.0];
+  antenna9.color = [11/255, 63/255, 121/255, 1.0];
+  antenna9.size = 7.0;
+  antenna9.segments = 5;
+  antenna9.render();
+
+  var antenna10 = new Circle();
+  antenna10.position = [-0.175, 0.33, 0.0];
+  antenna10.color = [11/255, 63/255, 121/255, 1.0];
+  antenna10.size = 5.0;
+  antenna10.segments = 5;
+  antenna10.render();
+
+  var antenna11 = new Circle();
+  antenna11.position = [-0.24, 0.365, 0.0];
+  antenna11.color = [11/255, 63/255, 121/255, 1.0];
+  antenna11.size = 4.0;
+  antenna11.segments = 5;
+  antenna11.render();
+
+  var antenna12 = new Circle();
+  antenna12.position = [-0.27, 0.31, 0.0];
+  antenna12.color = [11/255, 63/255, 121/255, 1.0];
+  antenna12.size = 3.0;
+  antenna12.segments = 5;
+  antenna12.render();
+
 }
