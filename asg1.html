@@ -18,6 +18,7 @@
     <script src="triangle.js"></script>
     <script src="circle.js"></script>
     <script src="butterfly.js"></script>
+    <script src="pizza.js"></script>
     <br><br>
     <input type="button" value="Clear Canvas" onclick="clearCanvas()"></input>
     <br><br>
@@ -27,6 +28,7 @@
     <input type="button" id="Triangle" value="Triangle" onclick="ChangeShapeToTriangle()"></input>
     <input type="button" id="Circle" value="Circle" onclick="ChangeShapeToCircle()"></input>
     <input type="button" id="Butterfly" value="Draw a Butterfly" onclick="butterfly()"></input>
+    <input type="button" id="Pizza_paint_brush" value="Pizza paint brush" onclick="ChangeShapeToPizza()"></input>
     <br> <br>
     <label for="name">Shape Color:</label>
     <br><br>
@@ -40,7 +42,7 @@
     <input type="range" id="Transparency" min=0 max=100 value=0 class="slider"></input>
     <br><br>
     <label for="name">Shape size:</label>
-    <input type="range" id="shape_size"></input>
+    <input type="range" id="shape_size" value=15></input>
     <label for="name">(Circles) Segment Count:</label>
     <input type="range" id="segment_size" min = 3 max = 50></input>
   </body>

@@ -33,7 +33,7 @@ let g_points_array = [] // this will store all the shapes to be rendered
 const POINT = 0;
 const TRIANGLE = 1;
 const CIRCLE = 2;
-
+const PIZZA = 3;
 // we will be starting with default: point (square shape)
 let G_SHAPE_TYPE = POINT
 
@@ -120,6 +120,10 @@ function ChangeShapeToCircle() {
   G_SHAPE_TYPE = CIRCLE;
 }
 
+function ChangeShapeToPizza() {
+  G_SHAPE_TYPE = PIZZA;
+}
+
 // this function does everything when something is clicked
 function click(ev) {
   var x = ev.clientX; // x coordinate of a mouse pointer
@@ -129,6 +133,7 @@ function click(ev) {
   x = ((x - rect.left) - canvas.width/2)/(canvas.width/2);
   y = (canvas.height/2 - (y - rect.top))/(canvas.height/2);
 
+  console.log(x, y);
   // extracting all the things needed
   selectColor(); // extract the colours
   selectSize(); // get the size
@@ -148,6 +153,9 @@ function click(ev) {
     new_point = new Circle();
     new_point.type = "Circle";
     new_point.segments = number_of_segments;
+  } else if (G_SHAPE_TYPE == PIZZA) {
+    pizza(x, y);
+    return;
   }
 
   new_point.position[0] = x;
@@ -164,6 +172,15 @@ function click(ev) {
 
 }
 
+function pizza(x, y) {
+
+  let point = new Pizza();
+  point.size = size_of_shape;
+  point.position[0] = x;
+  point.position[1] = y;
+  g_points_array.push(point);
+  renderAllShapes();
+}
 // // this will listen to all sliders
 // this is slowing down the program
 // function AddActionsToHtmlUI() {
