@@ -49,17 +49,19 @@ function clearCanvas() {
 }
 
 // Function to render all shapes stored in g_points_array
+// we need a way to store how and when exactly was the butterfly drawn
 function renderAllShapes() {
   // Clear the canvas
   gl.clear(gl.COLOR_BUFFER_BIT);
-  // check if we also need to draw the image
+  // check if we also need to draw the image: butterfly so butterfly does not get erased when we are painting over it
   if (image_array.length > 0) {
     for (var i = 0; i < image_array.length; i ++) {
       gl.uniform4f(u_FragColor, image_array[i][0][0], image_array[i][0][1], image_array[i][0][2], image_array[i][0][3]);
-      console.log("image_array[i][1]", image_array[i][1]);
       drawTriangles(image_array[i][1]);
     }
   }
+
+  // then draw all the clicked shapes
   var len = g_points_array.length;
   for(var i = 0; i < len; i++) {
     g_points_array[i].render();
