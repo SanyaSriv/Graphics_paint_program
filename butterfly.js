@@ -25,7 +25,7 @@ function butterfly() {
   // triangle 32
   gl.uniform4f(u_FragColor, 22/255, 88/255, 144/255, 1.0);
   drawTriangles([0.0, -0.07, 0.0, 0.07, 0.05, 0.0])
-  image_array.push([[22/255, 88/255, 144/255], [0.0, -0.07, 0.0, 0.07, 0.05, 0.0]]);
+  image_array.push([[22/255, 88/255, 144/255, 1.0], [0.0, -0.07, 0.0, 0.07, 0.05, 0.0]]);
 
   // triangle 33
   gl.uniform4f(u_FragColor, 22/255, 88/255, 144/255, 1.0);
@@ -192,91 +192,356 @@ function butterfly() {
   image_array.push([[21/255, 77/255, 136/255, 1.0], [-0.30, -0.30, -0.52, -0.06, -0.43, -0.37]]);
 
   // going to draw the butterfly antenna - right side
+
+
   // The shade of the dots should get lighter as they get smaller
-  var antenna1 = new Circle();
-  antenna1.position = [0.035, 0.155, 0.0];
-  antenna1.color = blue9;
-  antenna1.size = 10.0;
-  antenna1.segments = 5;
-  antenna1.render();
+  // The image_array is calling the function drawTriangles inside renderAllShapes
+  // so I am converting the circles into triangles so we do not have to change any
+  // functionality inside asg1.js
 
-  var antenna2 = new Circle();
-  antenna2.position = [0.08, 0.235, 0.0];
-  antenna2.color = blue8;
-  antenna2.size = 8.0;
-  antenna2.segments = 5;
-  antenna2.render();
+  var antenna_position = [0.035, 0.155, 0.0];
+  var antenna_color = blue9;
+  var antenna_size = 10.0/300;
+  var antenna_segments = 5;
+  var step = 360 / antenna_segments;
 
-  var antenna3 = new Circle();
-  antenna3.position = [0.125, 0.285, 0.0];
-  antenna3.color = blue7;
-  antenna3.size = 7.0;
-  antenna3.segments = 5;
-  antenna3.render();
+  for (var i = 0; i < 360; i += step) {
+    let angle1 = i * (Math.PI / 180);
+    let angle2 = (i + step) * (Math.PI / 180);
 
-  var antenna4 = new Circle();
-  antenna4.position = [0.175, 0.33, 0.0];
-  antenna4.color = blue6;
-  antenna4.size = 5.0;
-  antenna4.segments = 5;
-  antenna4.render();
+    // point 1
+    var point0_x = antenna_position[0];
+    var point0_y = antenna_position[1];
 
-  var antenna5 = new Circle();
-  antenna5.position = [0.24, 0.365, 0.0];
-  antenna5.color = blue5;
-  antenna5.size = 4.0;
-  antenna5.segments = 5;
-  antenna5.render();
+    // point2
+    var point1_x = antenna_position[0] + (Math.cos(angle1) * antenna_size);
+    var point1_y = antenna_position[1] + (Math.sin(angle1) * antenna_size);
 
-  var antenna6 = new Circle();
-  antenna6.position = [0.27, 0.31, 0.0];
-  antenna6.color = blue4;
-  antenna6.size = 3.0;
-  antenna6.segments = 5;
-  antenna6.render();
+    // point3
+    var point2_x = antenna_position[0] + (Math.cos(angle2) * antenna_size);
+    var point2_y = antenna_position[1] + (Math.sin(angle2) * antenna_size);
+
+    // Draw
+    gl.uniform4f(u_FragColor, antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]);
+    drawTriangles([point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]);
+    image_array.push([[antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]], [point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]]);
+  }
+
+
+  antenna_position = [0.08, 0.235, 0.0];
+  antenna_color = blue8;
+  antenna_size = 8.0 / 300;
+  antenna_segments = 5;
+  step = 360 / antenna_segments;
+
+  for (var i = 0; i < 360; i += step) {
+    let angle1 = i * (Math.PI / 180);
+    let angle2 = (i + step) * (Math.PI / 180);
+
+    // point 1
+    var point0_x = antenna_position[0];
+    var point0_y = antenna_position[1];
+
+    // point2
+    var point1_x = antenna_position[0] + (Math.cos(angle1) * antenna_size);
+    var point1_y = antenna_position[1] + (Math.sin(angle1) * antenna_size);
+
+    // point3
+    var point2_x = antenna_position[0] + (Math.cos(angle2) * antenna_size);
+    var point2_y = antenna_position[1] + (Math.sin(angle2) * antenna_size);
+
+    // Draw
+    gl.uniform4f(u_FragColor, antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]);
+    drawTriangles([point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]);
+    image_array.push([[antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]], [point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]]);
+  }
+
+
+  antenna_position = [0.125, 0.285, 0.0];
+  antenna_color = blue7;
+  antenna_size = 7.0 / 300;
+  antenna_segments = 5;
+  step = 360 / antenna_segments;
+
+  for (var i = 0; i < 360; i += step) {
+    let angle1 = i * (Math.PI / 180);
+    let angle2 = (i + step) * (Math.PI / 180);
+
+    // point 1
+    var point0_x = antenna_position[0];
+    var point0_y = antenna_position[1];
+
+    // point2
+    var point1_x = antenna_position[0] + (Math.cos(angle1) * antenna_size);
+    var point1_y = antenna_position[1] + (Math.sin(angle1) * antenna_size);
+
+    // point3
+    var point2_x = antenna_position[0] + (Math.cos(angle2) * antenna_size);
+    var point2_y = antenna_position[1] + (Math.sin(angle2) * antenna_size);
+
+    // Draw
+    gl.uniform4f(u_FragColor, antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]);
+    drawTriangles([point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]);
+    image_array.push([[antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]], [point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]]);
+  }
+
+  antenna_position = [0.175, 0.33, 0.0];
+  antenna_color = blue6;
+  antenna_size = 5.0 / 300;
+  antenna_segments = 5;
+  step = 360 / antenna_segments;
+
+  for (var i = 0; i < 360; i += step) {
+    let angle1 = i * (Math.PI / 180);
+    let angle2 = (i + step) * (Math.PI / 180);
+
+    // point 1
+    var point0_x = antenna_position[0];
+    var point0_y = antenna_position[1];
+
+    // point2
+    var point1_x = antenna_position[0] + (Math.cos(angle1) * antenna_size);
+    var point1_y = antenna_position[1] + (Math.sin(angle1) * antenna_size);
+
+    // point3
+    var point2_x = antenna_position[0] + (Math.cos(angle2) * antenna_size);
+    var point2_y = antenna_position[1] + (Math.sin(angle2) * antenna_size);
+
+    // Draw
+    gl.uniform4f(u_FragColor, antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]);
+    drawTriangles([point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]);
+    image_array.push([[antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]], [point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]]);
+  }
+
+
+  antenna_position = [0.24, 0.365, 0.0];
+  antenna_color = blue5;
+  antenna_size = 4.0 / 300;
+  antenna_segments = 5;
+  step = 360 / antenna_segments;
+
+  for (var i = 0; i < 360; i += step) {
+    let angle1 = i * (Math.PI / 180);
+    let angle2 = (i + step) * (Math.PI / 180);
+
+    // point 1
+    var point0_x = antenna_position[0];
+    var point0_y = antenna_position[1];
+
+    // point2
+    var point1_x = antenna_position[0] + (Math.cos(angle1) * antenna_size);
+    var point1_y = antenna_position[1] + (Math.sin(angle1) * antenna_size);
+
+    // point3
+    var point2_x = antenna_position[0] + (Math.cos(angle2) * antenna_size);
+    var point2_y = antenna_position[1] + (Math.sin(angle2) * antenna_size);
+
+    // Draw
+    gl.uniform4f(u_FragColor, antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]);
+    drawTriangles([point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]);
+    image_array.push([[antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]], [point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]]);
+  }
+
+  antenna_position = [0.27, 0.31, 0.0];
+  antenna_color = blue4;
+  antenna_size = 3.0 / 300;
+  antenna_segments = 5;
+  step = 360 / antenna_segments;
+
+  for (var i = 0; i < 360; i += step) {
+    let angle1 = i * (Math.PI / 180);
+    let angle2 = (i + step) * (Math.PI / 180);
+
+    // point 1
+    var point0_x = antenna_position[0];
+    var point0_y = antenna_position[1];
+
+    // point2
+    var point1_x = antenna_position[0] + (Math.cos(angle1) * antenna_size);
+    var point1_y = antenna_position[1] + (Math.sin(angle1) * antenna_size);
+
+    // point3
+    var point2_x = antenna_position[0] + (Math.cos(angle2) * antenna_size);
+    var point2_y = antenna_position[1] + (Math.sin(angle2) * antenna_size);
+
+    // Draw
+    gl.uniform4f(u_FragColor, antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]);
+    drawTriangles([point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]);
+    image_array.push([[antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]], [point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]]);
+  }
+
 
   // now going to add the left antenna
 
-  var antenna7 = new Circle();
-  antenna7.position = [-0.035, 0.155, 0.0];
-  antenna7.color = blue9;
-  antenna7.size = 10.0;
-  antenna7.segments = 5;
-  antenna7.render();
+  var antenna_position = [-0.035, 0.155, 0.0];
+  var antenna_color = blue9;
+  var antenna_size = 10.0/300;
+  var antenna_segments = 5;
+  var step = 360 / antenna_segments;
 
-  var antenna8 = new Circle();
-  antenna8.position = [-0.08, 0.235, 0.0];
-  antenna8.color = blue8;
-  antenna8.size = 8.0;
-  antenna8.segments = 5;
-  antenna8.render();
+  for (var i = 0; i < 360; i += step) {
+    let angle1 = i * (Math.PI / 180);
+    let angle2 = (i + step) * (Math.PI / 180);
 
-  var antenna9 = new Circle();
-  antenna9.position = [-0.125, 0.285, 0.0];
-  antenna9.color = blue7;
-  antenna9.size = 7.0;
-  antenna9.segments = 5;
-  antenna9.render();
+    // point 1
+    var point0_x = antenna_position[0];
+    var point0_y = antenna_position[1];
 
-  var antenna10 = new Circle();
-  antenna10.position = [-0.175, 0.33, 0.0];
-  antenna10.color = blue6;
-  antenna10.size = 5.0;
-  antenna10.segments = 5;
-  antenna10.render();
+    // point2
+    var point1_x = antenna_position[0] + (Math.cos(angle1) * antenna_size);
+    var point1_y = antenna_position[1] + (Math.sin(angle1) * antenna_size);
 
-  var antenna11 = new Circle();
-  antenna11.position = [-0.24, 0.365, 0.0];
-  antenna11.color = blue5;
-  antenna11.size = 4.0;
-  antenna11.segments = 5;
-  antenna11.render();
+    // point3
+    var point2_x = antenna_position[0] + (Math.cos(angle2) * antenna_size);
+    var point2_y = antenna_position[1] + (Math.sin(angle2) * antenna_size);
 
-  var antenna12 = new Circle();
-  antenna12.position = [-0.27, 0.31, 0.0];
-  antenna12.color = blue4;
-  antenna12.size = 3.0;
-  antenna12.segments = 5;
-  antenna12.render();
+    // Draw
+    gl.uniform4f(u_FragColor, antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]);
+    drawTriangles([point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]);
+    image_array.push([[antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]], [point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]]);
+  }
+
+
+  antenna_position = [-0.08, 0.235, 0.0];
+  antenna_color = blue8;
+  antenna_size = 8.0 / 300;
+  antenna_segments = 5;
+  step = 360 / antenna_segments;
+
+  for (var i = 0; i < 360; i += step) {
+    let angle1 = i * (Math.PI / 180);
+    let angle2 = (i + step) * (Math.PI / 180);
+
+    // point 1
+    var point0_x = antenna_position[0];
+    var point0_y = antenna_position[1];
+
+    // point2
+    var point1_x = antenna_position[0] + (Math.cos(angle1) * antenna_size);
+    var point1_y = antenna_position[1] + (Math.sin(angle1) * antenna_size);
+
+    // point3
+    var point2_x = antenna_position[0] + (Math.cos(angle2) * antenna_size);
+    var point2_y = antenna_position[1] + (Math.sin(angle2) * antenna_size);
+
+    // Draw
+    gl.uniform4f(u_FragColor, antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]);
+    drawTriangles([point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]);
+    image_array.push([[antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]], [point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]]);
+  }
+
+
+  antenna_position = [-0.125, 0.285, 0.0];
+  antenna_color = blue7;
+  antenna_size = 7.0 / 300;
+  antenna_segments = 5;
+  step = 360 / antenna_segments;
+
+  for (var i = 0; i < 360; i += step) {
+    let angle1 = i * (Math.PI / 180);
+    let angle2 = (i + step) * (Math.PI / 180);
+
+    // point 1
+    var point0_x = antenna_position[0];
+    var point0_y = antenna_position[1];
+
+    // point2
+    var point1_x = antenna_position[0] + (Math.cos(angle1) * antenna_size);
+    var point1_y = antenna_position[1] + (Math.sin(angle1) * antenna_size);
+
+    // point3
+    var point2_x = antenna_position[0] + (Math.cos(angle2) * antenna_size);
+    var point2_y = antenna_position[1] + (Math.sin(angle2) * antenna_size);
+
+    // Draw
+    gl.uniform4f(u_FragColor, antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]);
+    drawTriangles([point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]);
+    image_array.push([[antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]], [point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]]);
+  }
+
+  antenna_position = [-0.175, 0.33, 0.0];
+  antenna_color = blue6;
+  antenna_size = 5.0 / 300;
+  antenna_segments = 5;
+  step = 360 / antenna_segments;
+
+  for (var i = 0; i < 360; i += step) {
+    let angle1 = i * (Math.PI / 180);
+    let angle2 = (i + step) * (Math.PI / 180);
+
+    // point 1
+    var point0_x = antenna_position[0];
+    var point0_y = antenna_position[1];
+
+    // point2
+    var point1_x = antenna_position[0] + (Math.cos(angle1) * antenna_size);
+    var point1_y = antenna_position[1] + (Math.sin(angle1) * antenna_size);
+
+    // point3
+    var point2_x = antenna_position[0] + (Math.cos(angle2) * antenna_size);
+    var point2_y = antenna_position[1] + (Math.sin(angle2) * antenna_size);
+
+    // Draw
+    gl.uniform4f(u_FragColor, antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]);
+    drawTriangles([point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]);
+    image_array.push([[antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]], [point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]]);
+  }
+
+
+  antenna_position = [-0.24, 0.365, 0.0];
+  antenna_color = blue5;
+  antenna_size = 4.0 / 300;
+  antenna_segments = 5;
+  step = 360 / antenna_segments;
+
+  for (var i = 0; i < 360; i += step) {
+    let angle1 = i * (Math.PI / 180);
+    let angle2 = (i + step) * (Math.PI / 180);
+
+    // point 1
+    var point0_x = antenna_position[0];
+    var point0_y = antenna_position[1];
+
+    // point2
+    var point1_x = antenna_position[0] + (Math.cos(angle1) * antenna_size);
+    var point1_y = antenna_position[1] + (Math.sin(angle1) * antenna_size);
+
+    // point3
+    var point2_x = antenna_position[0] + (Math.cos(angle2) * antenna_size);
+    var point2_y = antenna_position[1] + (Math.sin(angle2) * antenna_size);
+
+    // Draw
+    gl.uniform4f(u_FragColor, antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]);
+    drawTriangles([point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]);
+    image_array.push([[antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]], [point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]]);
+  }
+
+  antenna_position = [-0.27, 0.31, 0.0];
+  antenna_color = blue4;
+  antenna_size = 3.0 / 300;
+  antenna_segments = 5;
+  step = 360 / antenna_segments;
+
+  for (var i = 0; i < 360; i += step) {
+    let angle1 = i * (Math.PI / 180);
+    let angle2 = (i + step) * (Math.PI / 180);
+
+    // point 1
+    var point0_x = antenna_position[0];
+    var point0_y = antenna_position[1];
+
+    // point2
+    var point1_x = antenna_position[0] + (Math.cos(angle1) * antenna_size);
+    var point1_y = antenna_position[1] + (Math.sin(angle1) * antenna_size);
+
+    // point3
+    var point2_x = antenna_position[0] + (Math.cos(angle2) * antenna_size);
+    var point2_y = antenna_position[1] + (Math.sin(angle2) * antenna_size);
+
+    // Draw
+    gl.uniform4f(u_FragColor, antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]);
+    drawTriangles([point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]);
+    image_array.push([[antenna_color[0], antenna_color[1], antenna_color[2], antenna_color[3]], [point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]]);
+  }
 
 }
