@@ -7,7 +7,7 @@ function butterfly() {
   // has to be drawn
 
   g_points_array.push(DRAW_BUTTERFLY_NOW);
-  
+
   var blue9 = [11/255, 63/255, 121/255, 1.0];
   var blue8 = [42/255, 111/255, 161/255, 1.0];
   var blue7 = [51/255, 139/255, 171/255, 1.0];
@@ -18,22 +18,22 @@ function butterfly() {
   var blue2;
   var blue1;
   // making the butterfly body
-  // triangle 30
+  // triangle 29
   gl.uniform4f(u_FragColor, blue9[0], blue9[1], blue9[2], blue9[3]);
   drawTriangles([0.0, -0.14, 0.0, 0.14, 0.10, 0.0]);
   image_array.push([[blue9[0], blue9[1], blue9[2], blue9[3]], [0.0, -0.14, 0.0, 0.14, 0.10, 0.0]]);
 
-  // triangle 31
+  // triangle 30
   gl.uniform4f(u_FragColor, 21/255, 99/255, 160/255, 1.0);
   drawTriangles([0.0, 0.14, 0.0, -0.14, -0.10, 0.0]);
   image_array.push([[21/255, 99/255, 160/255, 1.0], [0.0, 0.14, 0.0, -0.14, -0.10, 0.0]]);
 
-  // triangle 32
+  // triangle 31
   gl.uniform4f(u_FragColor, 22/255, 88/255, 144/255, 1.0);
   drawTriangles([0.0, -0.07, 0.0, 0.07, 0.05, 0.0])
   image_array.push([[22/255, 88/255, 144/255, 1.0], [0.0, -0.07, 0.0, 0.07, 0.05, 0.0]]);
 
-  // triangle 33
+  // triangle 32
   gl.uniform4f(u_FragColor, 22/255, 88/255, 144/255, 1.0);
   drawTriangles([0.0, 0.07, 0.0, -0.07, -0.05, 0.0])
   image_array.push([[22/255, 88/255, 144/255, 1.0], [0.0, 0.07, 0.0, -0.07, -0.05, 0.0]]);
