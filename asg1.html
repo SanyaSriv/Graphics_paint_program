@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+    <style>
+        p{float:right;clear:right;display:block;padding-right: 55px;padding-top: 15px; text-align: left;}
+    </style>
   <head>
     <meta charset="utf-8" />
     <title>Change a point color</title>
@@ -9,7 +12,14 @@
     <canvas id="webgl" width="400" height="400">
     Please use a browser that supports "canvas"
     </canvas>
-
+    <img src="Butterfly_image.png" alt="Butterly diagram with the triangles labeled" width="400" height = "400"
+      style="float:right; padding-right: 170px; padding-top: 40px; position: static;"></img>
+    <p> For drawing a picture, I made a butterfly. Click on the "Draw a Butterfly" button to render the picture.
+    <br> For the awesomness part, I implemented 2 things:
+    <br>  - Paint transparency: We can use the transparency slider to make the color of the shape transparent
+    <br>  - Pizza shaped paint brush: Click on the Button "Pizza paint brush" to use it.
+    <br>  &nbsp;&nbsp;Transparency does not work with the pizza brush.
+    </p>
     <script src="lib/webgl-utils.js"></script>
     <script src="lib/webgl-debug.js"></script>
     <script src="lib/cuon-utils.js"></script>
