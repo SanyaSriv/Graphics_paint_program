@@ -2,6 +2,12 @@ function butterfly() {
 
   // defining some color arrays here that will be used later on
   // higher number = darker shade
+
+  // we need to insert something in the g_points_array to denote that now the image
+  // has to be drawn
+
+  g_points_array.push(DRAW_BUTTERFLY_NOW);
+  
   var blue9 = [11/255, 63/255, 121/255, 1.0];
   var blue8 = [42/255, 111/255, 161/255, 1.0];
   var blue7 = [51/255, 139/255, 171/255, 1.0];

@@ -26,10 +26,6 @@ let red_color, blue_color, green_color; // these will store the color informatio
 let number_of_segments; // this will store the number of segments information extracted from the slider
 let transparency; // this will store the transparency information extracted from the slider
 
-let image_array = []
-// this will store all the image related stuff
-// so when we click, the image does not dissapear
-
 // we will be replacing all the arrays with one singular array
 let g_points_array = [] // this will store all the shapes to be rendered
 
@@ -40,6 +36,16 @@ const CIRCLE = 2;
 
 // we will be starting with default: point (square shape)
 let G_SHAPE_TYPE = POINT
+
+// this will store all the image related stuff
+// so when we click, the image does not dissapear
+let image_array = []
+// format of the image array = [ [[rgb array], [points_array for calling drawTraingles()]],
+//                               [[rgb array], [points_array for calling drawTraingles()]], ...]
+
+// this denotes the time after which point and
+// before which point we need to draw the butterfly
+let DRAW_BUTTERFLY_NOW = -1;
 
 // this function will be used for clearing the canvas
 function clearCanvas() {
@@ -53,18 +59,19 @@ function clearCanvas() {
 function renderAllShapes() {
   // Clear the canvas
   gl.clear(gl.COLOR_BUFFER_BIT);
-  // check if we also need to draw the image: butterfly so butterfly does not get erased when we are painting over it
-  if (image_array.length > 0) {
-    for (var i = 0; i < image_array.length; i ++) {
-      gl.uniform4f(u_FragColor, image_array[i][0][0], image_array[i][0][1], image_array[i][0][2], image_array[i][0][3]);
-      drawTriangles(image_array[i][1]);
-    }
-  }
-
-  // then draw all the clicked shapes
+  // // check if we also need to draw the image: butterfly so butterfly does not get erased when we are painting over it
   var len = g_points_array.length;
   for(var i = 0; i < len; i++) {
-    g_points_array[i].render();
+    if (g_points_array[i] == DRAW_BUTTERFLY_NOW) {
+      // we need to draw the butterfly now
+      for (var j = 0; j < image_array.length; j ++) {
+        gl.uniform4f(u_FragColor, image_array[j][0][0], image_array[j][0][1], image_array[j][0][2], image_array[j][0][3]);
+        drawTriangles(image_array[j][1]);
+      }
+    } else {
+      // we need to draw the user clicked point
+      g_points_array[i].render();
+    }
   }
 }
 
