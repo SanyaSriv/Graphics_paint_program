@@ -10,10 +10,12 @@ class Circle {
     var xy = this.position;
     var rgba = this.color;
     var size = this.size;
-      // Pass the color of a point to u_FragColor variable
-    gl.uniform4f(u_FragColor, rgba[0], rgba[1], rgba[2], rgba[3]);
 
-    // Draw
+    // Pass the color of a point to u_FragColor variable
+    gl.uniform4f(u_FragColor, rgba[0], rgba[1], rgba[2], rgba[3]);
+    // Passing the size now
+    gl.uniform1f(u_PointSize, size);
+
     let center_x = xy[0];
     let center_y = xy[1];
     let step = 360 / this.segments;
@@ -37,6 +39,7 @@ class Circle {
       var point2_x = center_x + (Math.cos(angle2) * scaling_factor);
       var point2_y = center_y + (Math.sin(angle2) * scaling_factor);
 
+      // Draw
       drawTriangles([point0_x, point0_y, point1_x, point1_y, point2_x, point2_y]);
     }
 

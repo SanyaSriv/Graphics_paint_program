@@ -21,13 +21,13 @@ let gl;
 let a_Position;
 let u_PointSize;
 let u_FragColor;
-let size_of_shape;
-let red_color, blue_color, green_color;
-let number_of_segments;
-let transparency;
+let size_of_shape; // this will store the size of the shape extracted from the slider
+let red_color, blue_color, green_color; // these will store the color information extracted from the slider
+let number_of_segments; // this will store the number of segments information extracted from the slider
+let transparency; // this will store the transparency information extracted from the slider
 
 // we will be replacing all the arrays with one singular array
-let g_points_array = []
+let g_points_array = [] // this will store all the shapes to be rendered
 
 // for knowing which shape to draw
 const POINT = 0;
@@ -42,6 +42,117 @@ function clearCanvas() {
   g_points_array = []
   renderAllShapes();
 }
+
+// Function to render all shapes stored in g_points_array
+function renderAllShapes() {
+  // Clear the canvas
+  gl.clear(gl.COLOR_BUFFER_BIT);
+  var len = g_points_array.length;
+  for(var i = 0; i < len; i++) {
+    g_points_array[i].render();
+  }
+}
+
+// for selecting the right color and adding it to g_colors
+// TODO: Change this approach
+function selectColor() {
+  red_color = document.getElementById("color_red").value;
+  blue_color = document.getElementById("color_blue").value;
+  green_color = document.getElementById("color_green").value;
+
+  red_color = red_color / 100;
+  blue_color = blue_color / 100;
+  green_color = green_color / 100;
+
+}
+
+// For getting the transparency level selected by the user
+function selectTransparency() {
+  transparency = document.getElementById("Transparency").value;
+}
+
+// for getting the size selected by the user
+function selectSize() {
+  size_of_shape = document.getElementById("shape_size").value;
+}
+
+// for getting the number of segments in case of circles
+function selectSegment() {
+  number_of_segments = document.getElementById("segment_size").value;
+}
+
+// set the current shape type to triangle
+function ChangeShapeToTriangle() {
+  console.log("Changing this thing to triangle");
+  G_SHAPE_TYPE = TRIANGLE;
+}
+
+// set the current shape to square
+function ChangeShapeToSquare() {
+  // square in our case is represented by a point;
+  G_SHAPE_TYPE = POINT;
+}
+
+// set the current shape to circle
+function ChangeShapeToCircle() {
+  G_SHAPE_TYPE = CIRCLE;
+}
+
+// this function does everything when something is clicked
+function click(ev) {
+  var x = ev.clientX; // x coordinate of a mouse pointer
+  var y = ev.clientY; // y coordinate of a mouse pointer
+  var rect = ev.target.getBoundingClientRect();
+
+  x = ((x - rect.left) - canvas.width/2)/(canvas.width/2);
+  y = (canvas.height/2 - (y - rect.top))/(canvas.height/2);
+
+  // extracting all the things needed
+  selectColor(); // extract the colours
+  selectSize(); // get the size
+  selectSegment(); // get the segments
+  selectTransparency(); // getting transparency
+
+  // make a new point or tiangle
+  let new_point;
+
+  if (G_SHAPE_TYPE == POINT) {
+    new_point = new Point();
+    new_point.type = "point";
+  } else if (G_SHAPE_TYPE == TRIANGLE) {
+    new_point = new Triangle();
+    new_point.type = "Triangle";
+  } else if (G_SHAPE_TYPE == CIRCLE) {
+    new_point = new Circle();
+    new_point.type = "Circle";
+    new_point.segments = number_of_segments;
+  }
+
+  new_point.position[0] = x;
+  new_point.position[1] = y;
+  new_point.color[0] = red_color;
+  new_point.color[1] = green_color;
+  new_point.color[2] = blue_color;
+  new_point.color[3] = 1 - (transparency / 100);
+  new_point.size = size_of_shape;
+
+  g_points_array.push(new_point); // pushing the shape into an array
+
+  renderAllShapes();
+
+}
+
+// // this will listen to all sliders
+// this is slowing down the program
+// function AddActionsToHtmlUI() {
+//   // listener for colors
+//   document.getElementById("color_red").addEventListener('mouseup', function() {red_color = this.value / 100});
+//   document.getElementById("color_blue").addEventListener('mouseup', function() {blue_color = this.value / 100});
+//   document.getElementById("color_green").addEventListener('mouseup', function() {green_color = this.value / 100});
+//
+//   // listener for transparency
+//   // document.getElementById("Transparency").addEventListener('mouseup', function() {transparency = this.value});
+// }
 
 // extract the canvas and initialize WebGL
 function setupWebGL() {
@@ -81,127 +192,27 @@ function connectVariablesToGLSL() {
     console.log('Failed to get the storage location of u_FragColor');
     return;
   }
+
+  // for transparency - TODO: Can shift these somewhere else
   gl.enable(gl.BLEND);
   gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 }
 
-// Function to render all shapes stored in g_points_array
-function renderAllShapes() {
-  // Clear <canvas>
-  gl.clear(gl.COLOR_BUFFER_BIT);
-  var len = g_points_array.length;
-  for(var i = 0; i < len; i++) {
-    g_points_array[i].render();
-  }
-}
-
-// for selecting the right color and adding it to g_colors
-// TODO: Change this approach
-function selectColor() {
-  red_color = document.getElementById("color_red").value;
-  blue_color = document.getElementById("color_blue").value;
-  green_color = document.getElementById("color_green").value;
-
-  red_color = red_color / 100;
-  blue_color = blue_color / 100;
-  green_color = green_color / 100;
-
-}
-
-// For getting the transparency level selected by the user
-function selectTransparency() {
-  transparency = document.getElementById("Transparency").value;
-}
-
-// for selecting the size selected by the user
-function selectSize() {
-  size_of_shape = document.getElementById("shape_size").value;
-}
-
-// for selecting the number of segments in case of circles
-function selectSegment() {
-  number_of_segments = document.getElementById("segment_size").value;
-}
-
-
-// TODO: chnage this thing to the AddActionsToHtmlUI function
-// Chnage the current shape type to triangle
-function ChangeShapeToTriangle() {
-  console.log("Changing this thing to triangle");
-  G_SHAPE_TYPE = TRIANGLE;
-}
-
-// change the current shape to square
-function ChangeShapeToSquare() {
-  // square in our case is represented by a point;
-  G_SHAPE_TYPE = POINT;
-}
-
-// Change the current shape to circle
-function ChangeShapeToCircle() {
-  G_SHAPE_TYPE = CIRCLE;
-}
-
-
-// this function does everything when something is clicked
-function click(ev) {
-  var x = ev.clientX; // x coordinate of a mouse pointer
-  var y = ev.clientY; // y coordinate of a mouse pointer
-  var rect = ev.target.getBoundingClientRect();
-
-  x = ((x - rect.left) - canvas.width/2)/(canvas.width/2);
-  y = (canvas.height/2 - (y - rect.top))/(canvas.height/2);
-  // extract the colours
-  selectColor();
-  // get the size
-  selectSize();
-  // get the segments
-  selectSegment();
-  // getting transparency
-  selectTransparency();
-  // make a new point or tiangle
-  let new_point;
-  if (G_SHAPE_TYPE == POINT) {
-    new_point = new Point();
-    new_point.type = "point";
-  } else if (G_SHAPE_TYPE == TRIANGLE) {
-    new_point = new Triangle();
-    new_point.type = "Triangle";
-  } else if (G_SHAPE_TYPE == CIRCLE) {
-    new_point = new Circle();
-    new_point.type = "Circle";
-    new_point.segments = number_of_segments;
-  }
-
-  new_point.position[0] = x;
-  new_point.position[1] = y;
-  new_point.color[0] = red_color;
-  new_point.color[1] = green_color;
-  new_point.color[2] = blue_color;
-  new_point.color[3] = 1 - (transparency / 100);
-  new_point.size = size_of_shape;
-
-  g_points_array.push(new_point);
-  renderAllShapes();
-
-}
-
-// TODO: Add the fps count: optional
 function main() {
-
+  // Setting up WebGL
   setupWebGL();
   // Initialize shaders
   connectVariablesToGLSL();
 
+  // listener function call
+  // AddActionsToHtmlUI(); // removing event listeners because it is massively slowing down the program
+
   // Register function (event handler) to be called on a mouse press
   canvas.onmousedown = function(ev){ click(ev) };
-  // to add drag functionality: (ev.buttons == 1): if the mouse is down
   canvas.onmousemove = function(ev){if (ev.buttons == 1) {click(ev)}};
+
   // Specify the color for clearing <canvas>
-
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
-  // Clear <canvas>
+  // Clear the canvas
   gl.clear(gl.COLOR_BUFFER_BIT);
-
-
 }

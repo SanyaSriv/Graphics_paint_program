@@ -12,6 +12,8 @@ class Triangle {
     var size = this.size;
     // Pass the color of a point to u_FragColor variable
     gl.uniform4f(u_FragColor, rgba[0], rgba[1], rgba[2], rgba[3]);
+    // passing the size
+    gl.uniform1f(u_PointSize, size);
     // Deciding the scaling factor
     var scaling_factor = this.size / 200;
     // Drawing the traingle finally
@@ -34,16 +36,13 @@ function drawTriangles(vertices) {
   // Write date into the buffer object
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array (vertices), gl.DYNAMIC_DRAW);
 
-  var a_Position = gl.getAttribLocation(gl.program, 'a_Position');
-  if (a_Position < 0) {
-    console.log('Failed to get the storage location of a_Position');
-    return -1;
-  }
   // Assign the buffer object to a_Position variable
   gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 0, 0);
 
   // Enable the assignment to a_Position variable
   gl.enableVertexAttribArray(a_Position);
+
+  // Draw
   gl.drawArrays(gl.TRIANGLES, 0, n);
   return n;
 }
