@@ -26,6 +26,10 @@ let red_color, blue_color, green_color; // these will store the color informatio
 let number_of_segments; // this will store the number of segments information extracted from the slider
 let transparency; // this will store the transparency information extracted from the slider
 
+let image_array = []
+// this will store all the image related stuff
+// so when we click, the image does not dissapear
+
 // we will be replacing all the arrays with one singular array
 let g_points_array = [] // this will store all the shapes to be rendered
 
@@ -39,6 +43,7 @@ let G_SHAPE_TYPE = POINT
 
 // this function will be used for clearing the canvas
 function clearCanvas() {
+  image_array = []
   g_points_array = []
   renderAllShapes();
 }
@@ -47,6 +52,14 @@ function clearCanvas() {
 function renderAllShapes() {
   // Clear the canvas
   gl.clear(gl.COLOR_BUFFER_BIT);
+  // check if we also need to draw the image
+  if (image_array.length > 0) {
+    for (var i = 0; i < image_array.length; i ++) {
+      gl.uniform4f(u_FragColor, image_array[i][0][0], image_array[i][0][1], image_array[i][0][2], image_array[i][0][3]);
+      console.log("image_array[i][1]", image_array[i][1]);
+      drawTriangles(image_array[i][1]);
+    }
+  }
   var len = g_points_array.length;
   for(var i = 0; i < len; i++) {
     g_points_array[i].render();
