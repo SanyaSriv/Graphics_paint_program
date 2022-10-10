@@ -41,7 +41,7 @@ class Pizza {
     topping_x = x - (0.3 * this.size/200);
     topping2.position = [topping_x, topping_y, 0.0];
     topping2.size = this.size / 3;
-    topping2.segments = 8;
+    topping2.segments = 9;
     topping2.render();
 
     let topping3_b = new Circle();
@@ -50,7 +50,7 @@ class Pizza {
     topping_x = x - (0.3 * this.size/200);
     topping2.position = [topping_x, topping_y, 0.0];
     topping2.size = this.size / 6;
-    topping2.segments = 8;
+    topping2.segments = 9;
     topping2.render();
 
   }
