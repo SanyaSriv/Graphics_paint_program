@@ -105,7 +105,6 @@ function selectSegment() {
 
 // set the current shape type to triangle
 function ChangeShapeToTriangle() {
-  console.log("Changing this thing to triangle");
   G_SHAPE_TYPE = TRIANGLE;
 }
 
@@ -133,7 +132,6 @@ function click(ev) {
   x = ((x - rect.left) - canvas.width/2)/(canvas.width/2);
   y = (canvas.height/2 - (y - rect.top))/(canvas.height/2);
 
-  console.log(x, y);
   // extracting all the things needed
   selectColor(); // extract the colours
   selectSize(); // get the size
