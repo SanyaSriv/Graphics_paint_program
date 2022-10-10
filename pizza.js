@@ -11,8 +11,15 @@ class Pizza {
     // now we need to make the crust
     let x = this.position[0];
     let y = this.position[1];
-    gl.uniform4f(u_FragColor, this.color[0], this.color[1], this.color[2], this.color[3]);
+    gl.uniform4f(u_FragColor, 240/255, 174/255, 43/255, 1.0);
+
     drawTriangles([x, y - 2*(this.size / 200), x - (this.size/200), y, x + (this.size/200), y]);
+
+    // making the cheese
+    let cheese_x = x - (0.1 * this.size/200);
+    let cheese_y = (y + - 0.1 * (this.size / 200));
+    gl.uniform4f(u_FragColor, this.color[0], this.color[1], this.color[2], this.color[3]);
+    drawTriangles([x, y - 2*(this.size / 200), cheese_x - 0.8 * (this.size/200), cheese_y, cheese_x + (this.size/200), cheese_y]);
 
     // toppping 1
     let topping1 = new Circle();
